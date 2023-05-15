@@ -10,7 +10,6 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-
 import {
   AuthenticityTokenProvider,
   createAuthenticityToken,
