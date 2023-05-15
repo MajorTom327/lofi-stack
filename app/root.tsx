@@ -16,6 +16,7 @@ import {
 } from "remix-utils";
 
 import baseStyle from "./index.css";
+import { sessionStorage } from "./services.server/session";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
