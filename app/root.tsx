@@ -1,5 +1,6 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,7 +8,13 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
+
+import {
+  AuthenticityTokenProvider,
+  createAuthenticityToken,
+} from "remix-utils";
 
 import baseStyle from "./index.css";
 
@@ -16,7 +23,26 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: baseStyle },
 ];
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const session = await sessionStorage.getSession(
+    request.headers.get("cookie")
+  );
+
+  const csrf = createAuthenticityToken(session);
+
+  return json(
+    { csrf },
+    {
+      headers: {
+        "Set-Cookie": await sessionStorage.commitSession(session),
+      },
+    }
+  );
+};
+
 export default function App() {
+  const { csrf } = useLoaderData<typeof loader>();
+
   return (
     <html lang="en">
       <head>
@@ -26,10 +52,12 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <AuthenticityTokenProvider token={csrf}>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </AuthenticityTokenProvider>
       </body>
     </html>
   );
