@@ -24,6 +24,8 @@ const lines = [
   `import type { ActionFunction, LoaderFunction } from "@remix-run/node";`,
   `import { json } from "@vercel/remix";`,
   ``,
+  `import ErrorHandler from "~/components/ErrorHandler";`,
+  ``,
   `type LoaderData = {};`,
   ``,
   `export const loader: LoaderFunction = async () => {`,
@@ -37,6 +39,8 @@ const lines = [
   `export const action: ActionFunction = async () => {`,
   `  return json({});`,
   `}`,
+  ``,
+  `export const ErrorBoundary = ErrorHandler;`,
   ``,
   `export default ${composantName};`,
 ];
