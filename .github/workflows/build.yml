@@ -1,0 +1,101 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: 🏗️ Build
+
+on:
+  push:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+permissions:
+  actions: write
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    name: 🛠 Build
+    runs-on: ubuntu-latest
+    environment: production
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://npm.pkg.github.com"
+          cache: "yarn"
+      - run: yarn
+      - run: yarn build
+
+  test:
+    name: 🧪 Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          registry-url: "https://npm.pkg.github.com"
+          cache: "yarn"
+      - run: yarn
+
+      - name: ⚡ Run vitest
+        run: npm run test:ci
+        env:
+          SESSION_SECRET: secret
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/dev?schema=public"
+          CRON_API_KEY: 00000000-0000-0000-0000-000000000000
+
+  # docker:
+  #   name: 🐳 Build
+  #   # only build/deploy main branch on pushes
+  #   if: ${{ (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') && (github.event_name == 'push' || github.event_name == 'tag')}}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: 🛑 Cancel Previous Runs
+  #       uses: styfle/cancel-workflow-action@0.11.0
+
+  #     - name: ⬇️ Checkout repo
+  #       uses: actions/checkout@v3
+
+  #     - name: 🐳 Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
+
+  #     - name: 🐳 Log in to the Container registry
+  #       uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+  #       with:
+  #         registry: ${{ env.REGISTRY }}
+  #         username: ${{ github.actor }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
+
+  #     - name: 🐳 Extract metadata (tags, labels) for Docker
+  #       id: meta
+  #       uses: docker/metadata-action@507c2f2dc502c992ad446e3d7a5dfbe311567a96
+  #       with:
+  #         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+  #     - name: Build and push Docker image
+  #       uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
+  #       with:
+  #         context: .
+  #         push: true
+  #         tags: ${{ steps.meta.outputs.tags }}
+  #         labels: ${{ steps.meta.outputs.labels }}
+  #         build-args: |
+  #           COMMIT_SHA=${{ github.sha }}
