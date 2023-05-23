@@ -2309,13 +2309,13 @@
     typescript "4.9.5"
     ws "8.13.0"
 
-"@vercel/remix@^1.16.0-patch.1":
-  version "1.16.0-patch.1"
-  resolved "https://registry.yarnpkg.com/@vercel/remix/-/remix-1.16.0-patch.1.tgz#466abba55ccb03d83a45e95e57fcd683adb2a5eb"
-  integrity sha512-SA6MVrD3WsKQ6D0lTHdYlonackbe7ByPP4qAQa3VK3IJWlO5e2skNuxbioKT+/uU3mwC4jIGnkl3LwL/ljjsMg==
+"@vercel/remix@^1.16.1":
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@vercel/remix/-/remix-1.16.1.tgz#c70c9fcadf50767438ad4220dca6a2893b7deb58"
+  integrity sha512-WdQSSjpzr7IDO2zeGBxs+tDD45S8KtnOEWZQSrFL8ZyhpxAqfHWR04rlVAI3iU+/xF4+xJzqA40tRyA/y4N+UQ==
   dependencies:
-    "@remix-run/node" "1.16.0"
-    "@remix-run/server-runtime" "1.16.0"
+    "@remix-run/node" "1.16.1"
+    "@remix-run/server-runtime" "1.16.1"
     isbot "^3.6.8"
 
 "@vercel/static-config@2.0.17":
