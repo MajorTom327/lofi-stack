@@ -1715,11 +1715,11 @@
     source-map "^0.7.3"
 
 "@remix-run/vercel@*":
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/vercel/-/vercel-1.16.0.tgz#abe0637bfcda453d46b8274a3aad05870721f233"
-  integrity sha512-JkYGmASVoyykWVjui4jQS1Wv6N9koRUQR+F+A/kvo0PBj4hlHMvO1Tqq8nsp46oXn8qP3CAasu1yyjfv7ZE3DA==
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@remix-run/vercel/-/vercel-1.16.1.tgz#98c9ad9c286fd38a26cd7678ea4432ddebca8414"
+  integrity sha512-cM7MqMJIpLp2YPCByrwLoBRalOpqcpVRZd8Q5DS1P3VzJ7VFXLHKLWszywCChVF/RZEtH1u31K0MVBorpM8FRQ==
   dependencies:
-    "@remix-run/node" "1.16.0"
+    "@remix-run/node" "1.16.1"
 
 "@remix-run/web-blob@^3.0.3", "@remix-run/web-blob@^3.0.4":
   version "3.0.4"
