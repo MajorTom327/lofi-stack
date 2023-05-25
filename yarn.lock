@@ -32,7 +32,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.21.7.tgz#61caffb60776e49a57ba61a88f02bedd8714f6bc"
   integrity sha512-KYMqFYTaenzMK4yUtf4EW9wc4N9ef80FsbMtkwool5zpwl4YrT1SdWYSTRcT94KO4hannogdS+LxY7L+arP3gA==
 
-"@babel/core@^7.18.6", "@babel/core@^7.20.7", "@babel/core@^7.21.4", "@babel/core@^7.21.8":
+"@babel/core@^7.20.7", "@babel/core@^7.21.4", "@babel/core@^7.21.8":
   version "7.21.8"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.21.8.tgz#2a8c7f0f53d60100ba4c32470ba0281c92aa9aa4"
   integrity sha512-YeM22Sondbo523Sz0+CirSPnbj9bG3P0CdHcBZdqUuaeOaYEFbOLoGU7lebvGP6P5J/WE9wOn7u7C4J9HvS1xQ==
@@ -71,7 +71,7 @@
     jsesc "^2.5.1"
     source-map "^0.5.0"
 
-"@babel/generator@^7.17.3", "@babel/generator@^7.18.6", "@babel/generator@^7.21.5":
+"@babel/generator@^7.17.3", "@babel/generator@^7.21.5":
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.21.5.tgz#c0c0e5449504c7b7de8236d99338c3e2a340745f"
   integrity sha512-SrKK/sRv8GesIW1bDagf9cCG38IOMYZusoe1dfg0D8aiUe3Amvoj1QtjTPAWcfrZFvIwlleLb0gxzQidL9w14w==
@@ -288,7 +288,7 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.17.3", "@babel/parser@^7.18.6", "@babel/parser@^7.20.5", "@babel/parser@^7.20.7", "@babel/parser@^7.21.5", "@babel/parser@^7.21.8":
+"@babel/parser@^7.17.3", "@babel/parser@^7.20.5", "@babel/parser@^7.20.7", "@babel/parser@^7.21.5", "@babel/parser@^7.21.8":
   version "7.21.8"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.21.8.tgz#642af7d0333eab9c0ad70b14ac5e76dbde7bfdf8"
   integrity sha512-6zavDGdzG3gUqAdWvlLFfk+36RilI+Pwyuuh7HItyeScCWP3k6i8vKclAQ0bM/0y/Kz/xiwvxhMv9MgTJP5gmA==
@@ -494,7 +494,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
 
-"@babel/plugin-syntax-jsx@^7.18.6", "@babel/plugin-syntax-jsx@^7.21.4":
+"@babel/plugin-syntax-jsx@^7.21.4":
   version "7.21.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.21.4.tgz#f264ed7bf40ffc9ec239edabc17a50c4f5b6fea2"
   integrity sha512-5hewiLct5OKyh6PLKEYaFclcqtIgCb6bmELouxjF6up5q3Sov7rOayW4RwhbaBL0dit8rA80GNfY+UuDp2mBbQ==
@@ -872,7 +872,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.18.6"
     "@babel/helper-plugin-utils" "^7.18.6"
 
-"@babel/preset-env@^7.18.6", "@babel/preset-env@^7.21.5":
+"@babel/preset-env@^7.21.5":
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.21.5.tgz#db2089d99efd2297716f018aeead815ac3decffb"
   integrity sha512-wH00QnTTldTbf/IefEVyChtRdw5RJvODT/Vb4Vcxq1AZvtXj6T0YeX0cAcXhI6/BdGuiP3GcNIL4OQbI2DVNxg==
@@ -977,7 +977,7 @@
     "@babel/plugin-transform-react-jsx-development" "^7.18.6"
     "@babel/plugin-transform-react-pure-annotations" "^7.18.6"
 
-"@babel/preset-typescript@^7.18.6", "@babel/preset-typescript@^7.21.5":
+"@babel/preset-typescript@^7.21.5":
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.21.5.tgz#68292c884b0e26070b4d66b202072d391358395f"
   integrity sha512-iqe3sETat5EOrORXiQ6rWfoOg2y68Cs75B9wNxdPW4kixJxh7aXQE1KPdWLDniC24T/6dSnguF33W9j/ZZQcmA==
@@ -1025,7 +1025,7 @@
     debug "^4.1.0"
     globals "^11.1.0"
 
-"@babel/traverse@^7.18.6", "@babel/traverse@^7.20.5", "@babel/traverse@^7.21.5":
+"@babel/traverse@^7.20.5", "@babel/traverse@^7.21.5":
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.21.5.tgz#ad22361d352a5154b498299d523cf72998a4b133"
   integrity sha512-AhQoI3YjWi6u/y/ntv7k48mcrCXmus0t79J9qPNlk/lAsFlCiJ047RmbfMOawySTHtywXhbXgpx/8nXMYd+oFw==
@@ -1049,7 +1049,7 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@babel/types@^7.17.0", "@babel/types@^7.18.6", "@babel/types@^7.18.9", "@babel/types@^7.20.0", "@babel/types@^7.20.2", "@babel/types@^7.20.5", "@babel/types@^7.20.7", "@babel/types@^7.21.0", "@babel/types@^7.21.4", "@babel/types@^7.21.5", "@babel/types@^7.4.4":
+"@babel/types@^7.17.0", "@babel/types@^7.18.6", "@babel/types@^7.18.9", "@babel/types@^7.20.0", "@babel/types@^7.20.5", "@babel/types@^7.20.7", "@babel/types@^7.21.0", "@babel/types@^7.21.4", "@babel/types@^7.21.5", "@babel/types@^7.4.4":
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.21.5.tgz#18dfbd47c39d3904d5db3d3dc2cc80bedb60e5b6"
   integrity sha512-m4AfNvVF2mVC/F7fDEdH2El3HzUg9It/XsCxZiOTTA3m3qYfcSVSbTfM6Q9xG+hYDniZssYhlXKKUMD5m8tF4Q==
@@ -1540,13 +1540,13 @@
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
 "@remix-run/css-bundle@*":
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/css-bundle/-/css-bundle-1.16.0.tgz#efbe328c8311c01602449746b8d2297e3d6f5c61"
-  integrity sha512-N8CgYGJNpdtyd4enuY0UIje+rHvDEPCxXnkAJ6ggTvoSM4c919e5LXUWM5o67NAbdBAYQfqQO/EknL3D/dSw7w==
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@remix-run/css-bundle/-/css-bundle-1.16.1.tgz#f62bd26293e9ce6a2df9b9ec3a0a1ff388cd06cd"
+  integrity sha512-Oxvi8HMIWzCOefl4J4refXT6AZrM7LyPjoz4LYpATl7N819NiVJa4+kNkIZ2s17vzw/qVB1nQcABIZfpzvd02g==
   dependencies:
-    "@remix-run/dev" "1.16.0"
+    "@remix-run/dev" "1.16.1"
 
-"@remix-run/dev@*":
+"@remix-run/dev@*", "@remix-run/dev@1.16.1":
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/@remix-run/dev/-/dev-1.16.1.tgz#925da5b62761302c435d371b4e85751dacc6102c"
   integrity sha512-PrCIOa4qkZISW9l2tAX9+KMPSfO9QfMGfBZz6rd79v/GQ9N2bhWgKGWwzWhlGWJoVnnRZT5VRIy6YZsepa52/A==
@@ -1562,64 +1562,6 @@
     "@babel/types" "^7.21.5"
     "@npmcli/package-json" "^2.0.0"
     "@remix-run/server-runtime" "1.16.1"
-    "@vanilla-extract/integration" "^6.2.0"
-    arg "^5.0.1"
-    cacache "^15.0.5"
-    chalk "^4.1.2"
-    chokidar "^3.5.1"
-    dotenv "^16.0.0"
-    esbuild "0.17.6"
-    esbuild-plugin-polyfill-node "^0.2.0"
-    execa "5.1.1"
-    exit-hook "2.2.1"
-    express "^4.17.1"
-    fast-glob "3.2.11"
-    fs-extra "^10.0.0"
-    get-port "^5.1.1"
-    gunzip-maybe "^1.4.2"
-    inquirer "^8.2.1"
-    jsesc "3.0.2"
-    json5 "^2.2.2"
-    lodash "^4.17.21"
-    lodash.debounce "^4.0.8"
-    lru-cache "^7.14.1"
-    minimatch "^9.0.0"
-    node-fetch "^2.6.9"
-    ora "^5.4.1"
-    postcss "^8.4.19"
-    postcss-discard-duplicates "^5.1.0"
-    postcss-load-config "^4.0.1"
-    postcss-modules "^6.0.0"
-    prettier "2.7.1"
-    pretty-ms "^7.0.1"
-    proxy-agent "^5.0.0"
-    react-refresh "^0.14.0"
-    recast "^0.21.5"
-    remark-frontmatter "4.0.1"
-    remark-mdx-frontmatter "^1.0.1"
-    semver "^7.3.7"
-    sort-package-json "^1.55.0"
-    tar-fs "^2.1.1"
-    tsconfig-paths "^4.0.0"
-    ws "^7.4.5"
-    xdm "^2.0.0"
-
-"@remix-run/dev@1.16.0":
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/dev/-/dev-1.16.0.tgz#05b9fd951d18c5913f7847e23041a98df2b0ab65"
-  integrity sha512-mA5Wv8sOgN3pSZvjn22aEu+O+uz2/qkgRvB5RnXWncPtvOq8dMmGH7J9kvKO/iOF8btK5FaudymK+AjM6Yifag==
-  dependencies:
-    "@babel/core" "^7.18.6"
-    "@babel/generator" "^7.18.6"
-    "@babel/parser" "^7.18.6"
-    "@babel/plugin-syntax-jsx" "^7.18.6"
-    "@babel/plugin-syntax-typescript" "^7.20.0"
-    "@babel/preset-env" "^7.18.6"
-    "@babel/preset-typescript" "^7.18.6"
-    "@babel/traverse" "^7.18.6"
-    "@babel/types" "^7.20.2"
-    "@npmcli/package-json" "^2.0.0"
-    "@remix-run/server-runtime" "1.16.0"
     "@vanilla-extract/integration" "^6.2.0"
     arg "^5.0.1"
     cacache "^15.0.5"
@@ -1714,11 +1656,6 @@
     "@remix-run/router" "1.6.2"
     react-router-dom "6.11.2"
 
-"@remix-run/router@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.6.0.tgz#45010e1826f4d81a1b2cfaf874f1aac93998cd28"
-  integrity sha512-N13NRw3T2+6Xi9J//3CGLsK2OqC8NMme3d/YX+nh05K9YHWGcv8DycHJrqGScSP4T75o8IN6nqIMhVFU8ohg8w==
-
 "@remix-run/router@1.6.2":
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.6.2.tgz#bbe75f8c59e0b7077584920ce2cc76f8f354934d"
@@ -1734,17 +1671,6 @@
     compression "^1.7.4"
     express "^4.17.1"
     morgan "^1.10.0"
-
-"@remix-run/server-runtime@1.16.0":
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/server-runtime/-/server-runtime-1.16.0.tgz#78a8b847f9f289ad2048bdba09a2f2c1c72f8179"
-  integrity sha512-a8rfS2SJ2nWhyGikXo+uknOSl1gW1/maDYuiG4Ki2wbVmF0v5mhJhlyB+1l+BjvXw+ZTS9HIiSQkg6L6JWqEcQ==
-  dependencies:
-    "@remix-run/router" "1.6.0"
-    "@web3-storage/multipart-parser" "^1.0.0"
-    cookie "^0.4.1"
-    set-cookie-parser "^2.4.8"
-    source-map "^0.7.3"
 
 "@remix-run/server-runtime@1.16.1":
   version "1.16.1"
