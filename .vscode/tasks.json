@@ -6,7 +6,7 @@
     {
       "label": "create page",
       "type": "shell",
-      "command": "yarn create:page ${input:pageName}",
+      "command": "yarn create:page '${input:pageName}'",
       "problemMatcher": [],
       "presentation": {
         "echo": false,
