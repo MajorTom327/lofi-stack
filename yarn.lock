@@ -1540,16 +1540,16 @@
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
 "@remix-run/css-bundle@*":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/css-bundle/-/css-bundle-1.16.1.tgz#f62bd26293e9ce6a2df9b9ec3a0a1ff388cd06cd"
-  integrity sha512-Oxvi8HMIWzCOefl4J4refXT6AZrM7LyPjoz4LYpATl7N819NiVJa4+kNkIZ2s17vzw/qVB1nQcABIZfpzvd02g==
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/css-bundle/-/css-bundle-1.17.0.tgz#bc1977854f3b275e73fbb7a6a3972694304ea7ac"
+  integrity sha512-uQNxO60qcV3+S/ASjmxan1PoJlu9EVWNQ9g16jAHEfj/XA0DpCdGVU87GhkdnFGJee6OyLeg7fO4jPKZ+dvKbA==
   dependencies:
-    "@remix-run/dev" "1.16.1"
+    "@remix-run/dev" "1.17.0"
 
-"@remix-run/dev@*", "@remix-run/dev@1.16.1":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/dev/-/dev-1.16.1.tgz#925da5b62761302c435d371b4e85751dacc6102c"
-  integrity sha512-PrCIOa4qkZISW9l2tAX9+KMPSfO9QfMGfBZz6rd79v/GQ9N2bhWgKGWwzWhlGWJoVnnRZT5VRIy6YZsepa52/A==
+"@remix-run/dev@*", "@remix-run/dev@1.17.0":
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/dev/-/dev-1.17.0.tgz#d6e5629a66aa8fc167da8850515936e455e264d4"
+  integrity sha512-UczyZdcUfQCS8a53VT4UtGFUCLYPKFiMwfvZMMgDL6kbWnYrknvXkXICqG26QbyR3bKDR6JPm5I6wVsmTGp+vQ==
   dependencies:
     "@babel/core" "^7.21.8"
     "@babel/generator" "^7.21.5"
@@ -1561,7 +1561,7 @@
     "@babel/traverse" "^7.21.5"
     "@babel/types" "^7.21.5"
     "@npmcli/package-json" "^2.0.0"
-    "@remix-run/server-runtime" "1.16.1"
+    "@remix-run/server-runtime" "1.17.0"
     "@vanilla-extract/integration" "^6.2.0"
     arg "^5.0.1"
     cacache "^15.0.5"
@@ -1586,11 +1586,12 @@
     minimatch "^9.0.0"
     node-fetch "^2.6.9"
     ora "^5.4.1"
+    picomatch "^2.3.1"
     postcss "^8.4.19"
     postcss-discard-duplicates "^5.1.0"
     postcss-load-config "^4.0.1"
     postcss-modules "^6.0.0"
-    prettier "2.7.1"
+    prettier "^2.7.1"
     pretty-ms "^7.0.1"
     proxy-agent "^5.0.0"
     react-refresh "^0.14.0"
@@ -1661,6 +1662,11 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.6.2.tgz#bbe75f8c59e0b7077584920ce2cc76f8f354934d"
   integrity sha512-LzqpSrMK/3JBAVBI9u3NWtOhWNw5AMQfrUFYB0+bDHTSw17z++WJLsPsxAuK+oSddsxk4d7F/JcdDPM1M5YAhA==
 
+"@remix-run/router@1.6.3":
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.6.3.tgz#8205baf6e17ef93be35bf62c37d2d594e9be0dad"
+  integrity sha512-EXJysQ7J3veRECd0kZFQwYYd5sJMcq2O/m60zu1W2l3oVQ9xtub8jTOtYRE0+M2iomyG/W3Ps7+vp2kna0C27Q==
+
 "@remix-run/serve@*":
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/@remix-run/serve/-/serve-1.16.1.tgz#0af31a19659eb85ad1ec50ae35383d964b22d6b8"
@@ -1678,6 +1684,17 @@
   integrity sha512-HG+f3PGE9kzTTPe5i5Hv7UGrJLmFID1Ae4BMohP5e0xXOxbdlKDPj6NN6yGDgE7OqKFuDVliW2B5LlUdJZgUFw==
   dependencies:
     "@remix-run/router" "1.6.2"
+    "@web3-storage/multipart-parser" "^1.0.0"
+    cookie "^0.4.1"
+    set-cookie-parser "^2.4.8"
+    source-map "^0.7.3"
+
+"@remix-run/server-runtime@1.17.0":
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/server-runtime/-/server-runtime-1.17.0.tgz#f49168e9e1d1e343afe842305f346a934897d8a2"
+  integrity sha512-xcUXaOibfIFZlvuyuWouz/t3fYhHCqRoKeGxQFGd1BvQBCmPaiau7B1Ao4aJFKyY7eU/L35KCaGzZBTdIF+d5w==
+  dependencies:
+    "@remix-run/router" "1.6.3"
     "@web3-storage/multipart-parser" "^1.0.0"
     cookie "^0.4.1"
     set-cookie-parser "^2.4.8"
@@ -7045,10 +7062,10 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha512-ESF23V4SKG6lVSGZgYNpbsiaAkdab6ZgOxe52p7+Kid3W3u3bxR4Vfd/o21dmN7jSt0IwgZ4v5MUd26FEtXE9w==
 
-prettier@2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.7.1.tgz#e235806850d057f97bb08368a4f7d899f7760c64"
-  integrity sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==
+prettier@^2.7.1:
+  version "2.8.8"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
+  integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
 pretty-bytes@5.6.0:
   version "5.6.0"
