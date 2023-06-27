@@ -1605,9 +1605,9 @@
     xdm "^2.0.0"
 
 "@remix-run/eslint-config@*":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/eslint-config/-/eslint-config-1.16.1.tgz#059fe15791f7f57f8b71c1c78171a07e7da334e5"
-  integrity sha512-oVkkpgVrTM3CcKaaw5ZOwVjV+yGi7DzgEnjD+BCnLVj4CHQNc9KsNOwVW1ub9JqW5mnBdly5MHDcocEft2LJBw==
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/eslint-config/-/eslint-config-1.18.0.tgz#7fc30554ebc4b23425fb31846b015db63f637589"
+  integrity sha512-QOHGfHG8AbXnEFXMUIjPYNcN/Z4EGZ9AR6vBrZ2k5fV1m0YhxbR9Y0OXHkHn/T9F2ek7sAHmuuVF66ppNn2mjQ==
   dependencies:
     "@babel/core" "^7.21.8"
     "@babel/eslint-parser" "^7.21.8"
