@@ -1356,10 +1356,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.41.0.tgz#080321c3b68253522f7646b55b577dd99d2950b3"
   integrity sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==
 
-"@faker-js/faker@^8.0.1":
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.0.1.tgz#2157068931aaab555eda5ff87f50330aeeb6153a"
-  integrity sha512-kbh5MenpTN9U0B4QcOI1NoTPlZHniSYQ3BHbhAnPjJGAmmFqxoxTE4sGdpy7ZOO9038DPGCuhXyMkjOr05uVwA==
+"@faker-js/faker@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.0.2.tgz#bab698c5d3da9c52744e966e0e3eedb6c8b05c37"
+  integrity sha512-Uo3pGspElQW91PCvKSIAXoEgAUlRnH29sX2/p89kg7sP1m2PzCufHINd0FhTXQf6DYGiUlVncdSPa2F9wxed2A==
 
 "@gar/promisify@^1.0.1":
   version "1.1.3"
@@ -2045,12 +2045,12 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
-"@types/ramda@^0.29.1":
-  version "0.29.1"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.29.1.tgz#c3d3842b9bc4aa5fbe03e90faa0c3eff9ba0f9f4"
-  integrity sha512-Ff5RRG9YRqMgWOqZVVavSjGEvYHUnXnGF0YPGbzIWhB3o8qiccSJZlFX2z8qm3G1H/IC5w0ozHmlezUeQCtGfQ==
+"@types/ramda@^0.29.2":
+  version "0.29.2"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.29.2.tgz#b50d52c3958b0988356bc881bf77aadbd2e33651"
+  integrity sha512-JxvBGR3G4gV3RTOBugVHAAOD6iiv2WjlJ8BHr0s7KALdPpx2l+didoTuoJMmrA0eqpUaCm/slKP4TmxMRihd8g==
   dependencies:
-    types-ramda "^0.29.2"
+    types-ramda "^0.29.3"
 
 "@types/react-dom@^18.0.0", "@types/react-dom@^18.0.11":
   version "18.2.4"
@@ -3270,10 +3270,10 @@ csstype@^3.0.2, csstype@^3.0.7:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
 
-daisyui@^2.51.6:
-  version "2.51.6"
-  resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-2.51.6.tgz#c91f5a782f2e991b973dfe9d17d7e93cd973b372"
-  integrity sha512-JRqOKayuFCmWe4X4k6Qvx1y7V/VNao8U5eTSOhusOKIzCsYqf56+TCSe4d7zmqGE0V6JiLDYAT8JeoWUeRKFCw==
+daisyui@^2.52.0:
+  version "2.52.0"
+  resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-2.52.0.tgz#1e22abd655bf4a5cb466e1a1f264bb597e9ec254"
+  integrity sha512-LQTA5/IVXAJHBMFoeaEMfd7/akAFPPcdQPR3O9fzzcFiczneJFM73CFPnScmW2sOgn/D83cvkP854ep2T9OfTg==
   dependencies:
     color "^4.2"
     css-selector-tokenizer "^0.8.0"
@@ -7238,10 +7238,10 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-icons@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.8.0.tgz#621e900caa23b912f737e41be57f27f6b2bff445"
-  integrity sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==
+react-icons@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.9.0.tgz#ba44f436a053393adb1bdcafbc5c158b7b70d2a3"
+  integrity sha512-ijUnFr//ycebOqujtqtV9PFS7JjhWg0QU6ykURVHuL4cbofvRCf3f6GMn9+fBktEFQOIVZnuAYLZdiyadRQRFg==
 
 react-is@^16.13.1:
   version "16.13.1"
@@ -8331,10 +8331,10 @@ typed-array-length@^1.0.4:
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
 
-types-ramda@^0.29.2:
-  version "0.29.2"
-  resolved "https://registry.yarnpkg.com/types-ramda/-/types-ramda-0.29.2.tgz#2bf33863a51498b43f616cd8cd98227efe9109eb"
-  integrity sha512-HpLcR0ly2EfXQwG8VSI5ov6ml7PvtT+u+cp+7lZLu7q4nhnPDVW+rUTC1uy/SNs4aAyTUXri5M/LyhgvjEXJDg==
+types-ramda@^0.29.3:
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/types-ramda/-/types-ramda-0.29.3.tgz#0a611b4d414bf7c51ba417c3fd3352985b0de97f"
+  integrity sha512-6z8/UCI5/kRorQ91Mo+TUXImHpGAhmhg8ZIdT/tNrG+xSQvDwJXYyT5Nlw2U5VpoKetUZVqQXYYLQyq5Bzccsg==
   dependencies:
     ts-toolbelt "^9.6.0"
 
@@ -8621,10 +8621,10 @@ vite-tsconfig-paths@^4.2.0:
     globrex "^0.1.2"
     tsconfck "^2.1.0"
 
-"vite@^3.0.0 || ^4.0.0", vite@^4.1.4, vite@^4.3.8:
-  version "4.3.8"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.8.tgz#70cd6a294ab52d7fb8f37f5bc63d117dd19e9918"
-  integrity sha512-uYB8PwN7hbMrf4j1xzGDk/lqjsZvCDbt/JC5dyfxc19Pg8kRm14LinK/uq+HSLNswZEoKmweGdtpbnxRtrAXiQ==
+"vite@^3.0.0 || ^4.0.0", vite@^4.1.4, vite@^4.3.9:
+  version "4.3.9"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.9.tgz#db896200c0b1aa13b37cdc35c9e99ee2fdd5f96d"
+  integrity sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==
   dependencies:
     esbuild "^0.17.5"
     postcss "^8.4.23"
