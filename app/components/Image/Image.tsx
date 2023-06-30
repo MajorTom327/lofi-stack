@@ -1,5 +1,7 @@
-import { propOr } from "ramda";
+import { pathOr, propOr } from "ramda";
 import React from "react";
+
+import { isDevelopment } from "~/lib/isEnv";
 
 type Props = {
   src: string;
@@ -16,11 +18,13 @@ type Options = Partial<{
 }>;
 
 export const getImageUrl = (src: string, options?: Options) => {
-  if (process.env.NODE_ENV === "development") {
+  if (isDevelopment()) {
     return src;
   }
 
-  const url = new URL("/_vercel/image", process.env.APP_URL);
+  const appUrl = pathOr("http://localhost:3000", ["env", "APP_URL"], process);
+
+  const url = new URL("/_vercel/image", appUrl);
 
   url.searchParams.append("url", src);
 

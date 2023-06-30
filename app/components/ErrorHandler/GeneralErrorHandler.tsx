@@ -24,9 +24,6 @@ export const GeneralErrorHandler: React.FC<Props> = ({ error }) => {
               <CodeMockup.Line>
                 {error.stack.replace(/ {2,}/gi, "        ")}
               </CodeMockup.Line>
-              {/* {error.stack.split("\n").map((line: string, index: number) => (
-                <CodeMockup.Line key={index}>{line}</CodeMockup.Line>
-              ))} */}
             </CodeMockup>
           )}
         </div>

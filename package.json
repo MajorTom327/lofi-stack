@@ -15,8 +15,6 @@
     "@remix-run/css-bundle": "*",
     "@remix-run/node": "*",
     "@remix-run/react": "*",
-    "@remix-run/vercel": "*",
-    "@vercel/node": "^2.14.3",
     "@vercel/remix": "^1.16.1",
     "@vitest/ui": "^0.31.1",
     "classnames": "^2.3.2",
