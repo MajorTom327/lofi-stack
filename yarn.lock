@@ -1577,20 +1577,20 @@
     eslint-plugin-react-hooks "^4.6.0"
     eslint-plugin-testing-library "^5.10.2"
 
-"@remix-run/express@1.16.1":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/express/-/express-1.16.1.tgz#db0a51e6dab947ec9e9c3cc3916f15a85aa67d59"
-  integrity sha512-qBIuFiA0qiHCTT36RwnzxhoVaAEwUmg5bihxwSkhj6zIhjM98e1DQHeKJ4f0G9Zf/qxvdl+cRNjzvlauPmocqQ==
+"@remix-run/express@1.19.0":
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/express/-/express-1.19.0.tgz#895a0dd85d04b0b1b06d1c35db66b2192d6e9a23"
+  integrity sha512-wPDKKJiwYosC8rOHrq0ONe3qKLnmy56osFoD04Y+WCPzua6LkpatLvymzlO+4j1Xwe7szMrDbUBsSHo7ZknCkg==
   dependencies:
-    "@remix-run/node" "1.16.1"
+    "@remix-run/node" "1.19.0"
 
-"@remix-run/node@*":
-  version "1.18.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/node/-/node-1.18.1.tgz#ad63dee8d84f610d571a777819658b4424964952"
-  integrity sha512-Civ8hQGdQKxmYtDvzV+8sYOPiLfH2FtT35iSwEqDN49uraInljoWngSwzrRmKkilhI4eABSN9fv0trUDyOTBrQ==
+"@remix-run/node@*", "@remix-run/node@1.19.0":
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/node/-/node-1.19.0.tgz#d7b606b11b8af7ec42e6d43a58f6465d1c708f5c"
+  integrity sha512-gL0IBjcblddC85tQ5r7VHtS/oOVoWOoso+ZCC/G0SzZO/wEiq3bpi9c6UA1/bI1a9Kvgr+wKclWl9XwpWCGwvQ==
   dependencies:
-    "@remix-run/server-runtime" "1.18.1"
-    "@remix-run/web-fetch" "^4.3.4"
+    "@remix-run/server-runtime" "1.19.0"
+    "@remix-run/web-fetch" "^4.3.5"
     "@remix-run/web-file" "^3.0.2"
     "@remix-run/web-stream" "^1.0.3"
     "@web3-storage/multipart-parser" "^1.0.0"
@@ -1632,13 +1632,18 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.7.1.tgz#fea7ac35ae4014637c130011f59428f618730498"
   integrity sha512-bgVQM4ZJ2u2CM8k1ey70o1ePFXsEzYVZoWghh6WjM8p59jQ7HxzbHW4SbnWFG7V9ig9chLawQxDTZ3xzOF8MkQ==
 
+"@remix-run/router@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.7.2.tgz#cba1cf0a04bc04cb66027c51fa600e9cbc388bc8"
+  integrity sha512-7Lcn7IqGMV+vizMPoEl5F0XDshcdDYtMI6uJLQdQz5CfZAwy3vvGKYSUk789qndt5dEC4HfSjviSYlSoHGL2+A==
+
 "@remix-run/serve@*":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/serve/-/serve-1.16.1.tgz#0af31a19659eb85ad1ec50ae35383d964b22d6b8"
-  integrity sha512-wpYZcUH6rITI9fnUsHffLhOcq98l6DMQh9MFAiGjUjPpMta7X2c7C/l3xOsL3ioE45b1d7A+tS0F69aV71u+uQ==
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/serve/-/serve-1.19.0.tgz#759d31c2fe3254b29767b394d3c2ec49f59163e6"
+  integrity sha512-OK3U4p/jSE5tOiyC+mSZGWU1fTMhUHiVNElr1mEhgLcMyLHaorenz9cY7ybInfVnpfBcWOmOeWWCJHLfcVjYJg==
   dependencies:
-    "@remix-run/express" "1.16.1"
-    "@remix-run/node" "1.16.1"
+    "@remix-run/express" "1.19.0"
+    "@remix-run/node" "1.19.0"
     compression "^1.7.4"
     express "^4.17.1"
     morgan "^1.10.0"
@@ -1666,6 +1671,18 @@
     set-cookie-parser "^2.4.8"
     source-map "^0.7.3"
 
+"@remix-run/server-runtime@1.19.0":
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/server-runtime/-/server-runtime-1.19.0.tgz#0cc45e73f5b30c5cd78bf572a2f2250a5286e490"
+  integrity sha512-Qwo/7omjLxbBB7nnzzgWd/PAScMjLEjNCeBkOw9qdgAubPSGqGakqG4w036fwQ3rXB5OlHsTOZI4Hxoh4AJHSg==
+  dependencies:
+    "@remix-run/router" "1.7.2"
+    "@types/cookie" "^0.4.1"
+    "@web3-storage/multipart-parser" "^1.0.0"
+    cookie "^0.4.1"
+    set-cookie-parser "^2.4.8"
+    source-map "^0.7.3"
+
 "@remix-run/web-blob@^3.0.3", "@remix-run/web-blob@^3.0.4":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@remix-run/web-blob/-/web-blob-3.0.4.tgz#99c67b9d0fb641bd0c07d267fd218ae5aa4ae5ed"
@@ -1678,6 +1695,19 @@
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/@remix-run/web-fetch/-/web-fetch-4.3.4.tgz#6149582fa2199b8e2a35d4e653ba05772bd0e675"
   integrity sha512-AUM1XBa4hcgeNt2CD86OlB5aDLlqdMl0uJ+89R8dPGx07I5BwMXnbopCaPAkvSBIoHeT/IoLWIuZrLi7RvXS+Q==
+  dependencies:
+    "@remix-run/web-blob" "^3.0.4"
+    "@remix-run/web-form-data" "^3.0.3"
+    "@remix-run/web-stream" "^1.0.3"
+    "@web3-storage/multipart-parser" "^1.0.0"
+    abort-controller "^3.0.0"
+    data-uri-to-buffer "^3.0.1"
+    mrmime "^1.0.0"
+
+"@remix-run/web-fetch@^4.3.5":
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/@remix-run/web-fetch/-/web-fetch-4.3.5.tgz#10e23082477e56ff496e4f02899a0389cdd249c9"
+  integrity sha512-cLLeNLvLRyFRhJLulzS98bb07kJ+ENkGaqUkBisdG4FNEoZF6tXtrTGLWJNJa1nAP/wFkMKEDxIP77LgAPyeow==
   dependencies:
     "@remix-run/web-blob" "^3.0.4"
     "@remix-run/web-form-data" "^3.0.3"
