@@ -27,7 +27,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "remix-utils": "^6.3.0",
-    "ts-pattern": "^4.3.0",
+    "ts-pattern": "^5.0.4",
     "zod": "^3.21.4"
   },
   "devDependencies": {
