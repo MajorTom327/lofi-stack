@@ -1599,21 +1599,6 @@
     source-map-support "^0.5.21"
     stream-slice "^0.1.2"
 
-"@remix-run/node@1.18.1":
-  version "1.18.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/node/-/node-1.18.1.tgz#ad63dee8d84f610d571a777819658b4424964952"
-  integrity sha512-Civ8hQGdQKxmYtDvzV+8sYOPiLfH2FtT35iSwEqDN49uraInljoWngSwzrRmKkilhI4eABSN9fv0trUDyOTBrQ==
-  dependencies:
-    "@remix-run/server-runtime" "1.18.1"
-    "@remix-run/web-fetch" "^4.3.4"
-    "@remix-run/web-file" "^3.0.2"
-    "@remix-run/web-stream" "^1.0.3"
-    "@web3-storage/multipart-parser" "^1.0.0"
-    abort-controller "^3.0.0"
-    cookie-signature "^1.1.0"
-    source-map-support "^0.5.21"
-    stream-slice "^0.1.2"
-
 "@remix-run/react@*":
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/@remix-run/react/-/react-1.19.1.tgz#d2441189f777c2b952fe9c38cc26fcf9658b76bf"
@@ -1674,19 +1659,6 @@
   dependencies:
     "@remix-run/web-stream" "^1.0.0"
     web-encoding "1.1.5"
-
-"@remix-run/web-fetch@^4.3.4":
-  version "4.3.4"
-  resolved "https://registry.yarnpkg.com/@remix-run/web-fetch/-/web-fetch-4.3.4.tgz#6149582fa2199b8e2a35d4e653ba05772bd0e675"
-  integrity sha512-AUM1XBa4hcgeNt2CD86OlB5aDLlqdMl0uJ+89R8dPGx07I5BwMXnbopCaPAkvSBIoHeT/IoLWIuZrLi7RvXS+Q==
-  dependencies:
-    "@remix-run/web-blob" "^3.0.4"
-    "@remix-run/web-form-data" "^3.0.3"
-    "@remix-run/web-stream" "^1.0.3"
-    "@web3-storage/multipart-parser" "^1.0.0"
-    abort-controller "^3.0.0"
-    data-uri-to-buffer "^3.0.1"
-    mrmime "^1.0.0"
 
 "@remix-run/web-fetch@^4.3.5":
   version "4.3.5"
@@ -2198,13 +2170,13 @@
   resolved "https://registry.yarnpkg.com/@vanilla-extract/private/-/private-1.0.3.tgz#7ec72bc2ff6fe51f9d650f962e8d1989b073690f"
   integrity sha512-17kVyLq3ePTKOkveHxXuIJZtGYs+cSoev7BlP+Lf4916qfDhk/HBjvlYDe8egrea7LNPHKwSZJK/bzZC+Q6AwQ==
 
-"@vercel/remix@^1.18.1":
-  version "1.18.1"
-  resolved "https://registry.yarnpkg.com/@vercel/remix/-/remix-1.18.1.tgz#5f11f8ce38a91f6a49d0cb8ca17881d2da3a927e"
-  integrity sha512-xwzeOZfEC/qgNuTOQtPjEe0blvex45hlYqtKD8NCAiyAO6CG8JpV+NWoQf48VTcpy0wqWjTJMvAwfLgYhX+4uQ==
+"@vercel/remix@^1.19.1":
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/@vercel/remix/-/remix-1.19.1.tgz#679b66bdd6ee4bf8c84d1d95591a46fbb44ac40c"
+  integrity sha512-lIiLbXq5y8g2vQmDkxBsYEWvr38LCqU45ThZ+v1as8P6U6PEBtVFtdWq9YRsG1IaOP15sgJyXglB43gpIJol4Q==
   dependencies:
-    "@remix-run/node" "1.18.1"
-    "@remix-run/server-runtime" "1.18.1"
+    "@remix-run/node" "1.19.1"
+    "@remix-run/server-runtime" "1.19.1"
     isbot "^3.6.8"
 
 "@vitejs/plugin-react@^4.0.0":
