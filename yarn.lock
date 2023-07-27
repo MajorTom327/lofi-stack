@@ -1491,9 +1491,9 @@
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
 "@remix-run/css-bundle@*":
-  version "1.18.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/css-bundle/-/css-bundle-1.18.1.tgz#58977e2d3fbf5b8b8e6a9ff8f3296a1e7619ca34"
-  integrity sha512-j6CflpY3fmMb1chZLBvNPifLmAVWexXJ+tiiZKwXC/eVIrbKADlQCsWmTdYPjsMP+OkZja7TGdSivqQOjCAu0Q==
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/@remix-run/css-bundle/-/css-bundle-1.19.1.tgz#94f363016661a56b93171c8c8b134dd76b00224a"
+  integrity sha512-KHIgRlhVm5MFgZgwhKiPm9mkGPy9Bg1YJpDTGqI64OXR193S9uOw89//Nd5ypvsb7EokPzY70YtbbsZWDbh8+A==
 
 "@remix-run/dev@*":
   version "1.19.1"
