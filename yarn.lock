@@ -7073,10 +7073,10 @@ remark-rehype@^9.0.0:
     mdast-util-to-hast "^11.0.0"
     unified "^10.0.0"
 
-remix-utils@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/remix-utils/-/remix-utils-6.3.0.tgz#e5ec6e426664cad38c496b60b34c0af75a775ddb"
-  integrity sha512-ivtBYxsToXYFFzvkVPJiw21a5bbzucJslK2H3McJDjkaGvivSGULdyUmSWwmDhzuAXdUxNOV/MBoWtBnNLCIOg==
+remix-utils@^6.6.0:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/remix-utils/-/remix-utils-6.6.0.tgz#9ad2120553f3b26a70269be3601db4a4f4de970b"
+  integrity sha512-4r4ifahU61Aa54m6Yu8B8GTzXyo+9RUzkFZdBNZOErpZ1LUMQ/ng4LeCJX2M6m4obdMjq0ot0pPlnAzeZOSttg==
   dependencies:
     intl-parse-accept-language "^1.0.0"
     is-ip "^3.1.0"
