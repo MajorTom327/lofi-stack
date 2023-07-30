@@ -1,8 +1,8 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const pkg = require("./package.json");
+const pkg = require("../package.json");
 
-fs.copyFileSync("./.env.dist", "./.env");
+fs.copyFileSync("../.env.dist", "../.env");
 
 inquirer
   .prompt([
@@ -28,7 +28,7 @@ inquirer
   .then((answers) => {
     if (answers.husky) {
       pkg.scripts.prepare = "husky install";
-      fs.writeFileSync("./package.json", JSON.stringify(pkg, null, 2));
+      fs.writeFileSync("../package.json", JSON.stringify(pkg, null, 2));
     }
 
     if (answers.dependabot) {
@@ -50,11 +50,11 @@ updates:
       - "${username}"
 `;
 
-      fs.writeFileSync("./.github/dependabot.yml", dependabot);
+      fs.writeFileSync("../.github/dependabot.yml", dependabot);
     }
 
     const actionContent = fs
-      .readFileSync("./.github/workflows/build.yml")
+      .readFileSync("../.github/workflows/build.yml")
       .toString();
 
     // Re-enable cache for yarn as it is disabled for the stack
@@ -63,7 +63,7 @@ updates:
       `cache: "yarn"`
     );
 
-    fs.writeFileSync("./.github/workflows/build.yml", newAction);
+    fs.writeFileSync("../.github/workflows/build.yml", newAction);
 
     console.log("🎉  Done!");
   })
