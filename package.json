@@ -8,7 +8,6 @@
     "test": "vitest -c ./test/vitest.config.ts --ui",
     "test:ci": "vitest -c ./test/vitest.config.ts run",
     "prettier": "prettier --write ./app",
-    "prepare": "husky install",
     "create:page": "node ./scripts/createPage.js"
   },
   "dependencies": {
