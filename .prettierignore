@@ -1,1 +1,3 @@
-remix.init
+node_modules
+/build
+/api
