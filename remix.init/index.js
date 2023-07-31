@@ -84,12 +84,13 @@ updates:
       }
 
       console.log("📝  Setting up environment files");
-      await new Promise((resolve, reject) => {
+      await (new Promise((resolve, reject) => {
         return fs.readFile(
           path.resolve(cwd, ".env"),
           "utf8",
           function (err, data) {
             if (err) {
+              console.log("An error occured while reading JSON Object from File.", err);
               return reject(err);
             }
             return resolve(data);
@@ -110,12 +111,15 @@ updates:
             "utf8",
             function (err) {
 
-              if (err) return reject(err);
+              if (err) {
+                console.log("An error occured while writing JSON Object to File.", err);
+                return reject(err)
+              };
               return resolve(result);
             }
           );
         })
-      });
+      }));
 
 
 
