@@ -14,14 +14,25 @@ const main = async ({ rootDirectory }) => {
   const APP_NAME = (DIR_NAME + "-").replace(/[^a-zA-Z0-9-_]/g, "-");
 
   const configMessageDone = `
-👉  cd ${rootDirectory}
-👉  yarn install
-👉  yarn dev
+🎉  Your project is ready!
+$> cd ${rootDirectory}
+$> yarn dev
 
-👉  git init # if not already done
-👉  git add .
-👉  git commit -m "Initial commit"
-👉  git push origin main`;
+If you didn't choose to enable git, maybe you should enable it now:
+$> git init
+
+If you want to commit your project, you can use:
+$> git add .
+$> git commit -m "Initial commit"
+
+$> git remote add origin <your-repository-url>
+$> git push origin main
+
+And if you use docker, you should use:
+$> docker-compose up -d
+
+Happy coding with the Lofi-Stack and Remix!
+`;
 
   const dependabotContent = `
 version: 2
@@ -91,7 +102,6 @@ updates:
         fs.unlinkSync(path.resolve(cwd, "package-lock.json"));
       }
 
-      console.log("📝  Setting up environment files");
       await (new Promise((resolve, reject) => {
         return fs.readFile(
           path.resolve(cwd, ".env"),
@@ -144,7 +154,6 @@ updates:
       });
 
       if (answers.git && answers.husky) {
-        console.log("📝  Setting up Husky")
         const pkg = require(path.resolve(cwd, "package.json"));
         pkg.scripts.prepare = "husky install";
         fs.writeFileSync(
@@ -155,7 +164,6 @@ updates:
 
       // Configure dependabot
       if (answers.dependabot) {
-        console.log("📝  Setting up dependabot")
         const username = answers.reviewer;
         const dependabot = dependabotContent.replace(/##octocat##/g, username);
 
@@ -172,7 +180,6 @@ updates:
         .toString();
 
         // Re-enable cache for yarn as it is disabled for the stack
-      console.log("📝  Setting up github actions")
       const newAction = actionContent.replace(
         /# cache: "yarn"/g,
         `cache: "yarn"`
@@ -185,7 +192,6 @@ updates:
 
       // Configure git
       if (answers.git) {
-        console.log("📝  Setting up git")
         try {
           execSync("git init", { cwd });
           execSync("git add .", { cwd });
@@ -196,13 +202,15 @@ updates:
 
       // Remove docker-compose
       if (!answers.docker) {
-        console.log("📝  Removing docker-compose")
         fs.unlinkSync(path.resolve(cwd, "docker-compose.yml"));
       }
 
-      console.log(configMessageDone);
+      const readmeContent = fs.readFileSync(path.resolve(cwd, "README.md"));
+      const newReadme = readmeContent.replace(/LofiStack/g, APP_NAME);
 
-      console.log("🎉  Ready to go !");
+      fs.writeFileSync(path.resolve(cwd, "README.md"), newReadme);
+
+      console.log(configMessageDone);
     })
     .catch((error) => {
       if (error.isTtyError) {
