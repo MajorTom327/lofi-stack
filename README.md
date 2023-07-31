@@ -8,7 +8,6 @@ Like:
 
 - [React](https://reactjs.org/)
 - [TailwindCSS](https://tailwindcss.com/)
-- [DaisyUI](https://daisyui.com/)
 - [ts-pattern](https://npmjs.org/package/ts-pattern)
 - [Ramda](https://ramdajs.com/)
 - [Ramda-Adjunct](https://char0n.github.io/ramda-adjunct/)

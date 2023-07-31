@@ -1,6 +1,5 @@
 import { isNotNilOrEmpty } from "ramda-adjunct";
 import React from "react";
-import { CodeMockup } from "react-daisyui";
 
 import { isDevelopment } from "~/lib/isEnv";
 
@@ -20,11 +19,9 @@ export const GeneralErrorHandler: React.FC<Props> = ({ error }) => {
             </h2>
           </div>
           {isDevelopment() && isNotNilOrEmpty(error.stack) && (
-            <CodeMockup>
-              <CodeMockup.Line>
-                {error.stack.replace(/ {2,}/gi, "        ")}
-              </CodeMockup.Line>
-            </CodeMockup>
+            <pre>
+              <code>{error.stack}</code>
+            </pre>
           )}
         </div>
       </div>

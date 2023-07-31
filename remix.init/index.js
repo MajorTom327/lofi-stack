@@ -16,7 +16,6 @@ const main = async ({ rootDirectory }) => {
   const APP_NAME = (DIR_NAME).replace(/[^a-zA-Z0-9-_]/g, "-");
 
   const configMessageDone = `
-🎉  Your project is ready!
 $> cd ${rootDirectory}
 $> yarn dev
 
@@ -234,12 +233,13 @@ updates:
         try {
           execSync("git init", { cwd });
           execSync("git add .", { cwd });
+          execSync("git rm --cached remix.init", { cwd });
         } catch (error) {
           console.log("Cannot initialize git repository");
         }
       }
 
-      spinner.succeed('Project configured')
+      spinner.succeed('Your project is ready!')
 
       console.log(configMessageDone);
     })

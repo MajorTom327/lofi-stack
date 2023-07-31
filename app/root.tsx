@@ -11,6 +11,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
+import { assoc, keys } from "ramda";
 import {
   AuthenticityTokenProvider,
   createAuthenticityToken,
@@ -37,8 +38,16 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const csrf = createAuthenticityToken(session);
 
+  // * Set here the publics env variables
+  const env = keys(process.env)
+    .filter((key) => key.toString().startsWith("PUBLIC_"))
+    .reduce((acc, key) => {
+      const value = process.env[key];
+      return assoc(key.toString().replace("PUBLIC_", ""), value, acc);
+    }, {});
+
   return json(
-    { csrf },
+    { csrf, env },
     {
       headers: {
         "Set-Cookie": await sessionStorage.commitSession(session),
@@ -58,7 +67,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-base-100 text-base-100-content">
         <AuthenticityTokenProvider token={csrf}>
           <Outlet />
           <ScrollRestoration />
