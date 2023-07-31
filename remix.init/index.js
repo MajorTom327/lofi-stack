@@ -4,6 +4,8 @@ const path = require("path");
 const { v4: uuidV4 } = require("uuid");
 const { execSync } = require("child_process");
 
+const { match } = require('ts-pattern');
+
 const main = async ({ rootDirectory }) => {
   console.log("🚀  Initializing your project...");
   const cwd = path.resolve(rootDirectory);
@@ -72,6 +74,12 @@ updates:
         message: "Do you want to add husky?",
         default: true,
       },
+      {
+        type: "confirm",
+        name: "docker",
+        message: "Keep docker-compose with postgresql",
+        default: true,
+      }
     ])
     .then(async (answers) => {
       fs.copyFileSync(
@@ -98,17 +106,31 @@ updates:
       }).then((data) => {
         return new Promise((resolve, reject) => {
 
-          const result = data
-            .replace(/APP_NAME=.*$/g, `APP_NAME=${APP_NAME}`)
-            .replace(/APP_KEY=.*$/g, `APP_KEY=${uuidV4()}`)
-            .replace(/SESSION_SECRET=.*$/g, `SESSION_SECRET=${uuidV4()}`);
+          let result = data.split("\n").map((line) => {
+            if (!line || line.length === 0) return line;
+            const [key, value] = line.split("=");
+
+            const new_value = match(key)
+              .with("APP_NAME", () => (APP_NAME))
+              .with("APP_KEY", () => (uuidV4()))
+              .with('SESSION_SECRET', () => (uuidV4()))
+              .otherwise(() => (value));
+
+            return [key, new_value].join("=");
+          })
+
+
+          if (answers.docker) {
+            result.push("POSTGRES_USER=postgres");
+            result.push("POSTGRES_PASSWORD=postgres")
+            result.push("POSTGRES_DB=dev")
+          }
 
           fs.writeFile(
             path.resolve(cwd, ".env"),
-            result,
+            result.join("\n"),
             "utf8",
             function (err) {
-
               if (err) {
                 console.error("An error occured while writing JSON Object to File.", err);
                 return reject(err)
@@ -117,15 +139,9 @@ updates:
             }
           );
         })
-      })).then((data) => {
-        console.log("📝  Setting up environment files", data)
-      }).catch((err) => {
-        console.error("Something goes wrong", err)
+      })).catch((err) => {
+        console.error("Something goes wrong on setting up env...", err)
       });
-
-
-
-
 
       if (answers.git && answers.husky) {
         console.log("📝  Setting up Husky")
@@ -176,6 +192,12 @@ updates:
         } catch (error) {
           console.log("Cannot initialize git repository");
         }
+      }
+
+      // Remove docker-compose
+      if (!answers.docker) {
+        console.log("📝  Removing docker-compose")
+        fs.unlinkSync(path.resolve(cwd, "docker-compose.yml"));
       }
 
       console.log(configMessageDone);
