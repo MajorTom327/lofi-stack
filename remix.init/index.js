@@ -2,11 +2,11 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const path = require("path");
 
-const main = () => {
+const main = async () => {
   console.log("🚀  Initializing your project...");
   const cwd = path.resolve(__dirname, "..");
 
-  inquirer
+  await inquirer
     .prompt([
       {
         type: "confirm",
