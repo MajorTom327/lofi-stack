@@ -90,7 +90,7 @@ updates:
           "utf8",
           function (err, data) {
             if (err) {
-              console.log("An error occured while reading JSON Object from File.", err);
+              console.log("An error occured while reading Object from File.", err);
               return reject(err);
             }
             return resolve(data);
@@ -103,23 +103,25 @@ updates:
             .replace(/APP_KEY=.*$/g, `APP_KEY=${uuidV4()}`)
             .replace(/SESSION_SECRET=.*$/g, `SESSION_SECRET=${uuidV4()}`);
 
-            console.log("📝  Setting up environment files", result)
-
-          fs.writeFileSync(
+          fs.writeFile(
             path.resolve(cwd, ".env"),
             result,
             "utf8",
             function (err) {
 
               if (err) {
-                console.log("An error occured while writing JSON Object to File.", err);
+                console.error("An error occured while writing JSON Object to File.", err);
                 return reject(err)
               };
               return resolve(result);
             }
           );
         })
-      }));
+      })).then((data) => {
+        console.log("📝  Setting up environment files", data)
+      }).catch((err) => {
+        console.error("Something goes wrong", err)
+      });
 
 
 
