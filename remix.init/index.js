@@ -1,6 +1,5 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const pkg = require("../package.json");
 const path = require("path");
 
 (() => {
