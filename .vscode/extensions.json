@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "naumovs.color-highlight",
+    "dbaeumer.vscode-eslint",
+    "usernamehw.errorlens",
+    "esbenp.prettier-vscode",
+    "codeforge.remix-forge",
+    "bradlc.vscode-tailwindcss"
+  ]
+}

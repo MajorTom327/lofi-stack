@@ -15,7 +15,9 @@ import checkEnv from "./lib/checkEnv";
 const ABORT_DELAY = 5_000;
 
 // * Declare here the variables to check for in your .env file
-checkEnv({});
+checkEnv({
+  required: ["SESSION_SECRET"],
+});
 
 export default function handleRequest(
   request: Request,

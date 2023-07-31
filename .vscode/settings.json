@@ -4,5 +4,9 @@
     ".cache": true,
     "api": true,
     "*.lock": true
-  }
+  },
+  "prettier.bracketSpacing": true,
+  "prettier.enable": true,
+  "eslint.enable": true,
+  "eslint.format.enable": true
 }

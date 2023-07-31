@@ -1,10 +1,41 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const path = require("path");
+const { v4: uuidV4 } = require("uuid");
 
-const main = async () => {
+const main = async ({ rootDirectory }) => {
   console.log("🚀  Initializing your project...");
-  const cwd = path.resolve(__dirname, "..");
+  const cwd = path.resolve(rootDirectory);
+
+  const DIR_NAME = path.basename(rootDirectory);
+  const APP_NAME = (DIR_NAME + "-").replace(/[^a-zA-Z0-9-_]/g, "-");
+
+  const configMessageDone = `
+👉  cd ${rootDirectory}
+👉  yarn install
+👉  yarn dev
+
+👉  git init # if not already done
+👉  git add .
+👉  git commit -m "Initial commit"
+👉  git push origin main`;
+
+  const dependabotContent = `
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+    reviewers:
+      - "##octocat##"
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "##octocat##"
+`;
 
   await inquirer
     .prompt([
@@ -27,15 +58,39 @@ const main = async () => {
         default: true,
       },
     ])
-    .then((answers) => {
+    .then(async (answers) => {
       fs.copyFileSync(
         path.resolve(cwd, ".env.dist"),
         path.resolve(cwd, ".env")
       );
 
-      const pkg = require(path.resolve(cwd, "package.json"));
+      // Setup the .env file
+      await fs.readFile(
+        path.resolve(cwd, ".env"),
+        "utf8",
+        function (err, data) {
+          if (err) {
+            return console.log(err);
+          }
+          const result = data
+            .replace(/APP_NAME=.*$/g, `APP_NAME=${APP_NAME}`)
+            .replace(/APP_KEY=.*$/g, `APP_KEY=${uuidV4()}`)
+            .replace(/SESSION_SECRET=.*$/g, `SESSION_SECRET=${uuidV4()}`);
 
+          fs.writeFile(
+            path.resolve(cwd, ".env"),
+            result,
+            "utf8",
+            function (err) {
+              if (err) return console.log(err);
+            }
+          );
+        }
+      );
+
+      // Configure husky
       if (answers.husky) {
+        const pkg = require(path.resolve(cwd, "package.json"));
         pkg.scripts.prepare = "husky install";
         fs.writeFileSync(
           path.resolve(cwd, "package.json"),
@@ -43,29 +98,17 @@ const main = async () => {
         );
       }
 
+      // Configure dependabot
       if (answers.dependabot) {
         const username = answers.reviewer;
-        const dependabot = `
-    version: 2
-    updates:
-      - package-ecosystem: github-actions
-        directory: /
-        schedule:
-          interval: daily
-        reviewers:
-          - "${username}"
-      - package-ecosystem: "npm" # See documentation for possible values
-        directory: "/" # Location of package manifests
-        schedule:
-          interval: "daily"
-        reviewers:
-          - "${username}"
-    `;
+        const dependabot = dependabotContent.replace(/##octocat##/g, username);
 
         fs.writeFileSync(
           path.resolve(cwd, ".github/dependabot.yml"),
           dependabot
         );
+      } else {
+        fs.unlinkSync(path.resolve(cwd, ".github/dependabot.yml"));
       }
 
       const actionContent = fs
@@ -83,13 +126,17 @@ const main = async () => {
         newAction
       );
 
-      console.log("🎉  Done!");
+      console.log(configMessageDone);
+
+      console.log("🎉  Ready to go !");
     })
     .catch((error) => {
       if (error.isTtyError) {
         // Prompt couldn't be rendered in the current environment
+        console.log("Cannot configure your project due to a TTY error");
       } else {
         // Something else went wrong
+        console.log("Something goes wrong during the configuration", error);
       }
     });
 };
