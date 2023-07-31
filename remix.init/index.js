@@ -2,7 +2,7 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const path = require("path");
 const { v4: uuidV4 } = require("uuid");
-const { execSync } = require("child_process");
+const { execSync, exec } = require("child_process");
 const ora = require('ora')
 const { match } = require('ts-pattern');
 
@@ -212,10 +212,18 @@ updates:
       if (answers.dependenciesManager === "yarn") {
         spinner.text = 'Installing dependencies with yarn';
 
-        execSync("yarn install", {
-          cwd,
-          stdio: "ignore",
-        });
+        await (new Promise((resolve, reject) => {
+          exec("yarn install", {
+            cwd,
+            stdio: "ignore",
+          }, (error) => {
+
+            if (error) {
+              return reject(error);
+            }
+            resolve();
+          });
+        }))
       }
 
       // ! This should be the last step as we git-add all the files
