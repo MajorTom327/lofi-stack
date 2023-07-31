@@ -34,6 +34,8 @@ $> docker-compose up -d
 Happy coding with the Lofi-Stack and Remix!
 `;
 
+const getPath = (filename) => path.resolve(path.join(cwd, filename));
+
   const dependabotContent = `
 version: 2
 updates:
@@ -176,7 +178,7 @@ updates:
       }
 
       const actionContent = fs
-        .readFileSync(path.resolve(cwd, ".github/workflows/build.yml"))
+        .readFileSync(getPath(".github/workflows/build.yml"))
         .toString();
 
         // Re-enable cache for yarn as it is disabled for the stack
@@ -186,7 +188,7 @@ updates:
       );
 
       fs.writeFileSync(
-        path.resolve(cwd, ".github/workflows/build.yml"),
+        getPath(".github/workflows/build.yml"),
         newAction
       );
 
@@ -202,18 +204,18 @@ updates:
 
       // Remove docker-compose
       if (!answers.docker) {
-        fs.unlinkSync(path.resolve(cwd, "docker-compose.yml"));
+        fs.unlinkSync(getPath("docker-compose.yml"));
       }
 
-      const readmeContent = fs.readFileSync(path.resolve(cwd, "README.md")).toString();
+      const readmeContent = fs.readFileSync(getPath("README.md")).toString();
       const newReadme = readmeContent.replace(/LofiStack/g, APP_NAME);
 
-      fs.writeFileSync(path.resolve(cwd, "README.md"), newReadme);
+      fs.writeFileSync(getPath("README.md"), newReadme);
 
-      const rootContent = fs.readFileSync(path.resolve(cwd, "/app/root.tsx")).toString();
+      const rootContent = fs.readFileSync(getPath("app/root.tsx")).toString();
       const newRootContent = rootContent.replace(/title: "New Remix App"/g, `title: "${APP_NAME}"`);
 
-      fs.writeFileSync(path.resolve(cwd, "/app/root.tsx"), newRootContent);
+      fs.writeFileSync(getPath("app/root.tsx"), newRootContent);
 
       console.log(configMessageDone);
     })
