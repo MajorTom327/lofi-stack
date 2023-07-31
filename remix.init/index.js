@@ -3,8 +3,10 @@ const inquirer = require("inquirer");
 const path = require("path");
 const { v4: uuidV4 } = require("uuid");
 const { execSync, exec } = require("child_process");
-const ora = require('ora')
+// const ora = require('ora')
 const { match } = require('ts-pattern');
+
+const ora = (str) => import('ora').then(({ default: ora }) => ora(str));
 
 const main = async ({ rootDirectory }) => {
   console.log("🚀  Initializing your project...");
@@ -96,7 +98,7 @@ updates:
     ])
     .then(async (answers) => {
 
-      const spinner = ora('Configuring your project').start()
+      const spinner = (await ora('Configuring your project')).start()
       fs.copyFileSync(
         path.resolve(cwd, ".env.dist"),
         path.resolve(cwd, ".env")
