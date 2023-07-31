@@ -3,7 +3,7 @@ const inquirer = require("inquirer");
 const path = require("path");
 const { v4: uuidV4 } = require("uuid");
 const { execSync } = require("child_process");
-
+const ora = require('ora')
 const { match } = require('ts-pattern');
 
 const main = async ({ rootDirectory }) => {
@@ -95,6 +95,8 @@ updates:
       }
     ])
     .then(async (answers) => {
+
+      const spinner = ora('Configuring your project').start()
       fs.copyFileSync(
         path.resolve(cwd, ".env.dist"),
         path.resolve(cwd, ".env")
@@ -192,8 +194,6 @@ updates:
         newAction
       );
 
-
-
       // Remove docker-compose
       if (!answers.docker) {
         fs.unlinkSync(getPath("docker-compose.yml"));
@@ -209,6 +209,14 @@ updates:
 
       fs.writeFileSync(getPath("app/root.tsx"), newRootContent);
 
+      if (answers.dependenciesManager === "yarn") {
+        spinner.text = 'Installing dependencies with yarn';
+
+        execSync("yarn install", {
+          cwd,
+          stdio: "ignore",
+        });
+      }
 
       // ! This should be the last step as we git-add all the files
       // Configure git
@@ -220,6 +228,8 @@ updates:
           console.log("Cannot initialize git repository");
         }
       }
+
+      spinner.succeed('Project configured')
 
       console.log(configMessageDone);
     })
