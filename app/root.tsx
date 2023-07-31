@@ -1,6 +1,7 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
+import type { V2_MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -19,6 +20,10 @@ import baseStyle from "~/index.css";
 import { sessionStorage } from "~/services/session.server";
 
 import { ErrorHandler } from "~/components/ErrorHandler";
+
+export const meta: V2_MetaFunction = () => {
+  return [{ title: "New Remix App" }];
+};
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),

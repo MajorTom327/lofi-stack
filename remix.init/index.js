@@ -210,6 +210,11 @@ updates:
 
       fs.writeFileSync(path.resolve(cwd, "README.md"), newReadme);
 
+      const rootContent = fs.readFileSync(path.resolve(cwd, "/app/root.tsx"));
+      const newRootContent = rootContent.replace(/title: "New Remix App"/g, `title: "${APP_NAME}"`);
+
+      fs.writeFileSync(path.resolve(cwd, "/app/root.tsx"), newRootContent);
+
       console.log(configMessageDone);
     })
     .catch((error) => {
