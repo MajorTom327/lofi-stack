@@ -205,12 +205,12 @@ updates:
         fs.unlinkSync(path.resolve(cwd, "docker-compose.yml"));
       }
 
-      const readmeContent = fs.readFileSync(path.resolve(cwd, "README.md"));
+      const readmeContent = fs.readFileSync(path.resolve(cwd, "README.md")).toString();
       const newReadme = readmeContent.replace(/LofiStack/g, APP_NAME);
 
       fs.writeFileSync(path.resolve(cwd, "README.md"), newReadme);
 
-      const rootContent = fs.readFileSync(path.resolve(cwd, "/app/root.tsx"));
+      const rootContent = fs.readFileSync(path.resolve(cwd, "/app/root.tsx")).toString();
       const newRootContent = rootContent.replace(/title: "New Remix App"/g, `title: "${APP_NAME}"`);
 
       fs.writeFileSync(path.resolve(cwd, "/app/root.tsx"), newRootContent);
