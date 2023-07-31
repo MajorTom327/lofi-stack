@@ -2,11 +2,8 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const path = require("path");
 
-console.log("🚀  Initializing your project...", __dirname);
+console.log("🚀  Initializing your project...");
 const cwd = path.resolve(__dirname, "..");
-fs.copyFileSync(path.resolve(cwd, ".env.dist"), path.resolve(cwd, ".env"));
-
-const pkg = require(path.resolve(cwd, "package.json"));
 
 inquirer
   .prompt([
@@ -30,6 +27,10 @@ inquirer
     },
   ])
   .then((answers) => {
+    fs.copyFileSync(path.resolve(cwd, ".env.dist"), path.resolve(cwd, ".env"));
+
+    const pkg = require(path.resolve(cwd, "package.json"));
+
     if (answers.husky) {
       pkg.scripts.prepare = "husky install";
       fs.writeFileSync(
