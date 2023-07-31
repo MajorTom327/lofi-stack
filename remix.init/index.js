@@ -92,7 +92,7 @@ updates:
             if (err) {
               return reject(err);
             }
-            resolve(data);
+            return resolve(data);
           })
       }).then((data) => {
         return new Promise((resolve, reject) => {
@@ -102,6 +102,8 @@ updates:
             .replace(/APP_KEY=.*$/g, `APP_KEY=${uuidV4()}`)
             .replace(/SESSION_SECRET=.*$/g, `SESSION_SECRET=${uuidV4()}`);
 
+            console.log("📝  Setting up environment files", result)
+
           fs.writeFileSync(
             path.resolve(cwd, ".env"),
             result,
@@ -109,11 +111,10 @@ updates:
             function (err) {
 
               if (err) return reject(err);
-              resolve(result);
+              return resolve(result);
             }
           );
         })
-
       });
 
 
