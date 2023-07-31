@@ -41,6 +41,13 @@ updates:
   await inquirer
     .prompt([
       {
+        type: "list",
+        name: "dependenciesManager",
+        message: "Which dependencies manager do you want to use?",
+        choices: ["yarn", "npm"],
+        loop: true,
+      },
+      {
         type: "confirm",
         name: "dependabot",
         message: "Do you want to add dependabot?",
@@ -71,6 +78,10 @@ updates:
         path.resolve(cwd, ".env.dist"),
         path.resolve(cwd, ".env")
       );
+
+      if (answers.dependenciesManager === "yarn") {
+        fs.unlinkSync(path.resolve(cwd, "package-lock.json"));
+      }
 
       // Setup the .env file
       await new Promise((resolve, reject) => {
