@@ -157,8 +157,12 @@ updates:
 
       // Configure git
       if (answers.git) {
-        execSync("git init", { cwd });
-        execSync("git add .", { cwd });
+        try {
+          execSync("git init", { cwd });
+          execSync("git add .", { cwd });
+        } catch (error) {
+          console.log("Cannot initialize git repository");
+        }
       }
 
       console.log(configMessageDone);
