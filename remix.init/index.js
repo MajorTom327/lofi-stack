@@ -2,6 +2,7 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const path = require("path");
 const { v4: uuidV4 } = require("uuid");
+const { execSync } = require("child_process");
 
 const main = async ({ rootDirectory }) => {
   console.log("🚀  Initializing your project...");
@@ -47,12 +48,19 @@ updates:
       },
       {
         type: "input",
+        when: (answers) => answers.dependabot,
         name: "reviewer",
         message: "What is your github username?",
         default: "octocat",
       },
       {
         type: "confirm",
+        name: "git",
+        message: "Do you want to initialize a git repository?",
+      },
+      {
+        type: "confirm",
+        when: (answers) => answers.git,
         name: "husky",
         message: "Do you want to add husky?",
         default: true,
@@ -65,28 +73,38 @@ updates:
       );
 
       // Setup the .env file
-      await fs.readFile(
-        path.resolve(cwd, ".env"),
-        "utf8",
-        function (err, data) {
-          if (err) {
-            return console.log(err);
-          }
+      await new Promise((resolve, reject) => {
+        return fs.readFile(
+          path.resolve(cwd, ".env"),
+          "utf8",
+          function (err, data) {
+            if (err) {
+              return reject(err);
+            }
+            resolve(data);
+          })
+      }).then((data) => {
+        return new Promise((resolve, reject) => {
+
           const result = data
             .replace(/APP_NAME=.*$/g, `APP_NAME=${APP_NAME}`)
             .replace(/APP_KEY=.*$/g, `APP_KEY=${uuidV4()}`)
             .replace(/SESSION_SECRET=.*$/g, `SESSION_SECRET=${uuidV4()}`);
 
-          fs.writeFile(
+          fs.writeFileSync(
             path.resolve(cwd, ".env"),
             result,
             "utf8",
             function (err) {
-              if (err) return console.log(err);
+
+              if (err) return reject(err);
+              resolve(result);
             }
           );
-        }
-      );
+        })
+
+      });
+
 
       // Configure husky
       if (answers.husky) {
@@ -125,6 +143,12 @@ updates:
         path.resolve(cwd, ".github/workflows/build.yml"),
         newAction
       );
+
+      // Configure git
+      if (answers.git) {
+        execSync("git init", { cwd });
+        execSync("git add .", { cwd });
+      }
 
       console.log(configMessageDone);
 
