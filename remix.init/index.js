@@ -11,7 +11,7 @@ const main = async ({ rootDirectory }) => {
   const cwd = path.resolve(rootDirectory);
 
   const DIR_NAME = path.basename(rootDirectory);
-  const APP_NAME = (DIR_NAME + "-").replace(/[^a-zA-Z0-9-_]/g, "-");
+  const APP_NAME = (DIR_NAME).replace(/[^a-zA-Z0-9-_]/g, "-");
 
   const configMessageDone = `
 🎉  Your project is ready!
@@ -192,15 +192,7 @@ updates:
         newAction
       );
 
-      // Configure git
-      if (answers.git) {
-        try {
-          execSync("git init", { cwd });
-          execSync("git add .", { cwd });
-        } catch (error) {
-          console.log("Cannot initialize git repository");
-        }
-      }
+
 
       // Remove docker-compose
       if (!answers.docker) {
@@ -216,6 +208,18 @@ updates:
       const newRootContent = rootContent.replace(/title: "New Remix App"/g, `title: "${APP_NAME}"`);
 
       fs.writeFileSync(getPath("app/root.tsx"), newRootContent);
+
+
+      // ! This should be the last step as we git-add all the files
+      // Configure git
+      if (answers.git) {
+        try {
+          execSync("git init", { cwd });
+          execSync("git add .", { cwd });
+        } catch (error) {
+          console.log("Cannot initialize git repository");
+        }
+      }
 
       console.log(configMessageDone);
     })
