@@ -83,7 +83,7 @@ updates:
         fs.unlinkSync(path.resolve(cwd, "package-lock.json"));
       }
 
-      // Setup the .env file
+      console.log("📝  Setting up environment files");
       await new Promise((resolve, reject) => {
         return fs.readFile(
           path.resolve(cwd, ".env"),
@@ -117,8 +117,11 @@ updates:
       });
 
 
-      // Configure husky
-      if (answers.husky) {
+
+
+
+      if (answers.git && answers.husky) {
+        console.log("📝  Setting up Husky")
         const pkg = require(path.resolve(cwd, "package.json"));
         pkg.scripts.prepare = "husky install";
         fs.writeFileSync(
@@ -129,6 +132,7 @@ updates:
 
       // Configure dependabot
       if (answers.dependabot) {
+        console.log("📝  Setting up dependabot")
         const username = answers.reviewer;
         const dependabot = dependabotContent.replace(/##octocat##/g, username);
 
@@ -144,7 +148,8 @@ updates:
         .readFileSync(path.resolve(cwd, ".github/workflows/build.yml"))
         .toString();
 
-      // Re-enable cache for yarn as it is disabled for the stack
+        // Re-enable cache for yarn as it is disabled for the stack
+      console.log("📝  Setting up github actions")
       const newAction = actionContent.replace(
         /# cache: "yarn"/g,
         `cache: "yarn"`
@@ -157,6 +162,7 @@ updates:
 
       // Configure git
       if (answers.git) {
+        console.log("📝  Setting up git")
         try {
           execSync("git init", { cwd });
           execSync("git add .", { cwd });
