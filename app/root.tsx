@@ -1,3 +1,7 @@
+import Button from "./components/Button";
+import Layout from "./components/Layout";
+import Footer from "./components/Layout/Footer";
+import Navbar from "./components/Navbar";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -11,16 +15,15 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import { assoc, keys } from "ramda";
+import { F, T, assoc, keys } from "ramda";
 import {
   AuthenticityTokenProvider,
   createAuthenticityToken,
 } from "remix-utils";
-import baseStyle from "~/index.css";
-
-import { sessionStorage } from "~/services/session.server";
-
+import { match } from "ts-pattern";
 import { ErrorHandler } from "~/components/ErrorHandler";
+import baseStyle from "~/index.css";
+import { sessionStorage } from "~/services/session.server";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "New Remix App" }];
@@ -30,7 +33,6 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   { rel: "stylesheet", href: baseStyle },
 ];
-
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await sessionStorage.getSession(
     request.headers.get("cookie")
@@ -40,7 +42,13 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   // * Set here the publics env variables
   const env = keys(process.env)
-    .filter((key) => key.toString().startsWith("PUBLIC_"))
+    // .filter((key) => key.toString().startsWith("PUBLIC_"))
+    .filter((key) =>
+      match(key.toString())
+        .with("APP_NAME", T)
+        .when((k) => k.startsWith("PUBLIC_"), T)
+        .otherwise(F)
+    )
     .reduce((acc, key) => {
       const value = process.env[key];
       return assoc(key.toString().replace("PUBLIC_", ""), value, acc);
@@ -57,7 +65,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function App() {
-  const { csrf } = useLoaderData<typeof loader>();
+  const { csrf, env } = useLoaderData<typeof loader>();
 
   return (
     <html lang="en">
@@ -69,7 +77,20 @@ export default function App() {
       </head>
       <body className="bg-base-100 text-base-100-content">
         <AuthenticityTokenProvider token={csrf}>
-          <Outlet />
+          <Layout
+            nav={
+              <Navbar>
+                <Navbar.Brand>
+                  <Button color="ghost" to="/">
+                    {env.APP_NAME}
+                  </Button>
+                </Navbar.Brand>
+              </Navbar>
+            }
+            footer={<Footer />}
+          >
+            <Outlet />
+          </Layout>
           <ScrollRestoration />
           <Scripts />
           <LiveReload />

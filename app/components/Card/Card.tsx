@@ -1,13 +1,14 @@
+import { getImageUrl } from "../Image/Image";
 import classNames from "classnames";
 import React, { useMemo } from "react";
-
-import { getImageUrl } from "../Image/Image";
+import { Colors } from "~/refs";
 
 type Props = {
   imgSrc?: string;
   imgAlt?: string;
   children: React.ReactNode;
   className?: string;
+  color?: Colors;
 };
 
 export const Card: React.FC<Props> = ({
@@ -15,8 +16,24 @@ export const Card: React.FC<Props> = ({
   className,
   imgSrc,
   imgAlt,
+  color,
 }) => {
-  const classes = classNames("border rounded-lg shadow", className);
+  const classes = classNames(
+    "border rounded-lg shadow",
+    {
+      "border-primary bg-primary text-primary-content": color === "primary",
+      "border-secondary bg-secondary text-secondary-content":
+        color === "secondary",
+      "border-accent bg-accent text-accent-content": color === "accent",
+      "border-danger bg-danger text-danger-content": color === "danger",
+      "border-info bg-info text-info-content": color === "info",
+      "border-success bg-success text-success-content": color === "success",
+      "border-warning bg-warning text-warning-content": color === "warning",
+      "border-base-100 bg-base-100 text-base-content":
+        color === "ghost" || !color,
+    },
+    className
+  );
 
   const src = useMemo(() => {
     if (!imgSrc) {

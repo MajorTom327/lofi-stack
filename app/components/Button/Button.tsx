@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import classNames from "classnames";
 import { isNotNilOrEmpty } from "ramda-adjunct";
 import React from "react";
+import { Colors } from "~/refs";
 
 type Props = {
   children: React.ReactNode;
@@ -10,15 +11,7 @@ type Props = {
   disabled?: boolean;
   onClick?: () => void;
   to?: string;
-  color?:
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "danger"
-    | "info"
-    | "success"
-    | "warning"
-    | "ghost";
+  color?: Colors;
 };
 
 export const Button: React.FC<Props> = ({
@@ -48,7 +41,7 @@ export const Button: React.FC<Props> = ({
         color === "success",
       "bg-warning text-warning-content border-warning hover:bg-warning-active":
         color === "warning",
-      "bg-base-100 text-base-content border-base-100 hover:bg-base-200":
+      "text-neutral-content border-none hover:bg-base-200/30":
         color === "ghost" || !color,
     },
     className
