@@ -10,7 +10,10 @@ export function useEnv(): Record<string, string> | undefined {
   return data.env;
 }
 
-export function useEnvValue(key: string, defaultValue?: string) {
+export function useEnvValue(
+  key: string,
+  defaultValue?: string
+): string | undefined {
   const env = useEnv();
   // @ts-expect-error Ramda types are not perfect
   return propOr<string | undefined>(defaultValue, key, env);

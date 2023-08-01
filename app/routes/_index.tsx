@@ -1,11 +1,14 @@
 import Card from "~/components/Card";
+import { useEnvValue } from "~/hooks/useEnv";
 
 export default function Index() {
+  const appName = useEnvValue("APP_NAME");
+
   return (
     <div className="container mx-auto">
       <Card>
         <Card.Title>
-          <h1 className="">Welcome to Remix</h1>
+          <h1 className="">Welcome to {appName || "remix"}</h1>
         </Card.Title>
         <ul>
           <li>
