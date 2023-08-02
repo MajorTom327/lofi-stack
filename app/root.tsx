@@ -15,7 +15,10 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
+import classNames from "classnames";
 import { F, T, assoc, keys } from "ramda";
+import { useState } from "react";
+import { FaBars } from "react-icons/fa";
 import {
   AuthenticityTokenProvider,
   createAuthenticityToken,
@@ -66,6 +69,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function App() {
   const { csrf, env } = useLoaderData<typeof loader>();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
     <html lang="en">
@@ -80,11 +84,23 @@ export default function App() {
           <Layout
             nav={
               <Navbar>
-                <Navbar.Brand>
-                  <Button color="ghost" to="/">
-                    {env.APP_NAME}
+                <div className="flex gap-2 items-center">
+                  <Navbar.Brand>
+                    <Button color="ghost" to="/">
+                      {env.APP_NAME}
+                    </Button>
+                  </Navbar.Brand>
+                  <Button
+                    color="ghost"
+                    className={classNames({
+                      "opacity-25 hover:opacity-80": sidebarOpen,
+                    })}
+                    ariaLabel="Toggle sidebar"
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                  >
+                    <FaBars />
                   </Button>
-                </Navbar.Brand>
+                </div>
               </Navbar>
             }
             footer={<Footer />}

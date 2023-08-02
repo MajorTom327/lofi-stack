@@ -7,7 +7,7 @@ type Props = {
 export const NavbarBrand: React.FC<Props> = ({ children }) => {
   return (
     <>
-      <div>{children}</div>
+      <div className="capitalize">{children}</div>
     </>
   );
 };

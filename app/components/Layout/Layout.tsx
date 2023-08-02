@@ -10,7 +10,7 @@ type Props = {
 export const Layout: React.FC<Props> = ({ children, nav, footer }) => {
   return (
     <>
-      <div className="flex flex-col gap-2 min-h-screen">
+      <div className="flex flex-col min-h-screen">
         {isNotNilOrEmpty(nav) && nav}
         <div className="flex-grow">{children}</div>
         {isNotNilOrEmpty(footer) && footer}

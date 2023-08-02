@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import classNames from "classnames";
 import { isNotNilOrEmpty } from "ramda-adjunct";
 import React from "react";
+import { P, match } from "ts-pattern";
 import { Colors } from "~/refs";
 
 type Props = {
@@ -9,10 +10,9 @@ type Props = {
   className?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
-  onClick?: () => void;
-  to?: string;
   color?: Colors;
-};
+  ariaLabel?: string;
+} & WithAction;
 
 export const Button: React.FC<Props> = ({
   children,
@@ -22,6 +22,7 @@ export const Button: React.FC<Props> = ({
   to,
   onClick,
   color,
+  ariaLabel,
 }) => {
   const classes = classNames(
     "py-2 px-4 text-center rounded border",
@@ -47,26 +48,33 @@ export const Button: React.FC<Props> = ({
     className
   );
 
-  if (isNotNilOrEmpty(to)) {
-    return (
-      <Link to={to!} prefetch="intent" className={classes}>
+  const actions = { to, onClick } as WithAction;
+
+  const content = match(actions)
+    .with({ to: P.string }, ({ to }) => (
+      <Link
+        to={to!}
+        prefetch="intent"
+        className={classes}
+        aria-label={ariaLabel}
+      >
         {children}
       </Link>
-    );
-  }
-
-  return (
-    <>
+    ))
+    .with({ onClick: P.not(P.nullish) }, ({ onClick }) => (
       <button
         className={classes}
         type={type}
         onClick={onClick}
+        aria-label={ariaLabel}
         disabled={disabled}
       >
         {children}
       </button>
-    </>
-  );
+    ))
+    .exhaustive();
+
+  return isNotNilOrEmpty(content) ? content : null;
 };
 
 Button.defaultProps = {};
