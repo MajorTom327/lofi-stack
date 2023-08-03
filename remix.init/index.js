@@ -4,16 +4,16 @@ const path = require("path");
 const { v4: uuidV4 } = require("uuid");
 const { execSync, exec } = require("child_process");
 // const ora = require('ora')
-const { match } = require('ts-pattern');
+const { match } = require("ts-pattern");
 
-const ora = (str) => import('ora').then(({ default: ora }) => ora(str));
+const ora = (str) => import("ora").then(({ default: ora }) => ora(str));
 
 const main = async ({ rootDirectory }) => {
   console.log("🚀  Initializing your project...");
   const cwd = path.resolve(rootDirectory);
 
   const DIR_NAME = path.basename(rootDirectory);
-  const APP_NAME = (DIR_NAME).replace(/[^a-zA-Z0-9-_]/g, "-");
+  const APP_NAME = DIR_NAME.replace(/[^a-zA-Z0-9-_]/g, "-");
 
   const configMessageDone = `
 $> cd ${rootDirectory}
@@ -35,7 +35,7 @@ $> docker-compose up -d
 Happy coding with the Lofi-Stack and Remix!
 `;
 
-const getPath = (filename) => path.resolve(path.join(cwd, filename));
+  const getPath = (filename) => path.resolve(path.join(cwd, filename));
 
   const dependabotContent = `
 version: 2
@@ -93,11 +93,10 @@ updates:
         name: "docker",
         message: "Keep docker-compose with postgresql",
         default: true,
-      }
+      },
     ])
     .then(async (answers) => {
-
-      const spinner = (await ora('Configuring your project')).start()
+      const spinner = (await ora("Configuring your project")).start();
       fs.copyFileSync(
         path.resolve(cwd, ".env.dist"),
         path.resolve(cwd, ".env")
@@ -107,56 +106,63 @@ updates:
         fs.unlinkSync(path.resolve(cwd, "package-lock.json"));
       }
 
-      await (new Promise((resolve, reject) => {
+      await new Promise((resolve, reject) => {
         return fs.readFile(
           path.resolve(cwd, ".env"),
           "utf8",
           function (err, data) {
             if (err) {
-              console.log("An error occured while reading Object from File.", err);
+              console.log(
+                "An error occured while reading Object from File.",
+                err
+              );
               return reject(err);
             }
             return resolve(data);
-          })
-      }).then((data) => {
-        return new Promise((resolve, reject) => {
-
-          let result = data.split("\n").map((line) => {
-            if (!line || line.length === 0) return line;
-            const [key, value] = line.split("=");
-
-            const new_value = match(key)
-              .with("APP_NAME", () => (APP_NAME))
-              .with("APP_KEY", () => (uuidV4()))
-              .with('SESSION_SECRET', () => (uuidV4()))
-              .otherwise(() => (value));
-
-            return [key, new_value].join("=");
-          })
-
-
-          if (answers.docker) {
-            result.push("POSTGRES_USER=postgres");
-            result.push("POSTGRES_PASSWORD=postgres")
-            result.push("POSTGRES_DB=dev")
           }
+        );
+      })
+        .then((data) => {
+          return new Promise((resolve, reject) => {
+            let result = data.split("\n").map((line) => {
+              if (!line || line.length === 0) return line;
+              const [key, value] = line.split("=");
 
-          fs.writeFile(
-            path.resolve(cwd, ".env"),
-            result.join("\n"),
-            "utf8",
-            function (err) {
-              if (err) {
-                console.error("An error occured while writing JSON Object to File.", err);
-                return reject(err)
-              };
-              return resolve(result);
+              const new_value = match(key)
+                .with("APP_NAME", () => APP_NAME)
+                .with("APP_KEY", () => uuidV4())
+                .with("SESSION_SECRET", () => uuidV4())
+                .otherwise(() => value);
+
+              return [key, new_value].join("=");
+            });
+
+            if (answers.docker) {
+              result.push("POSTGRES_USER=postgres");
+              result.push("POSTGRES_PASSWORD=postgres");
+              result.push("POSTGRES_DB=dev");
             }
-          );
+
+            fs.writeFile(
+              path.resolve(cwd, ".env"),
+              result.join("\n"),
+              "utf8",
+              function (err) {
+                if (err) {
+                  console.error(
+                    "An error occured while writing JSON Object to File.",
+                    err
+                  );
+                  return reject(err);
+                }
+                return resolve(result);
+              }
+            );
+          });
         })
-      })).catch((err) => {
-        console.error("Something goes wrong on setting up env...", err)
-      });
+        .catch((err) => {
+          console.error("Something goes wrong on setting up env...", err);
+        });
 
       if (answers.git && answers.husky) {
         const pkg = require(path.resolve(cwd, "package.json"));
@@ -184,16 +190,13 @@ updates:
         .readFileSync(getPath(".github/workflows/build.yml"))
         .toString();
 
-        // Re-enable cache for yarn as it is disabled for the stack
+      // Re-enable cache for yarn as it is disabled for the stack
       const newAction = actionContent.replace(
         /# cache: "yarn"/g,
         `cache: "yarn"`
       );
 
-      fs.writeFileSync(
-        getPath(".github/workflows/build.yml"),
-        newAction
-      );
+      fs.writeFileSync(getPath(".github/workflows/build.yml"), newAction);
 
       // Remove docker-compose
       if (!answers.docker) {
@@ -206,25 +209,31 @@ updates:
       fs.writeFileSync(getPath("README.md"), newReadme);
 
       const rootContent = fs.readFileSync(getPath("app/root.tsx")).toString();
-      const newRootContent = rootContent.replace(/title: "New Remix App"/g, `title: "${APP_NAME}"`);
+      const newRootContent = rootContent.replace(
+        /title: "New Remix App"/g,
+        `title: "${APP_NAME}"`
+      );
 
       fs.writeFileSync(getPath("app/root.tsx"), newRootContent);
 
       if (answers.dependenciesManager === "yarn") {
-        spinner.text = 'Installing dependencies with yarn';
+        spinner.text = "Installing dependencies with yarn";
 
-        await (new Promise((resolve, reject) => {
-          exec("yarn install", {
-            cwd,
-            stdio: "ignore",
-          }, (error) => {
-
-            if (error) {
-              return reject(error);
+        await new Promise((resolve, reject) => {
+          exec(
+            "yarn install",
+            {
+              cwd,
+              stdio: "ignore",
+            },
+            (error) => {
+              if (error) {
+                return reject(error);
+              }
+              resolve();
             }
-            resolve();
-          });
-        }))
+          );
+        });
       }
 
       // ! This should be the last step as we git-add all the files
@@ -233,13 +242,13 @@ updates:
         try {
           execSync("git init", { cwd });
           execSync("git add .", { cwd });
-          execSync("git rm --cached remix.init", { cwd });
+          execSync("git rm -r --cached remix.init", { cwd });
         } catch (error) {
           console.log("Cannot initialize git repository");
         }
       }
 
-      spinner.succeed('Your project is ready!')
+      spinner.succeed("Your project is ready!");
 
       console.log(configMessageDone);
     })
