@@ -16,9 +16,9 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import classNames from "classnames";
+import { Menu as MenuIcon } from "lucide-react";
 import { F, T, assoc, keys } from "ramda";
 import { useState } from "react";
-import { FaBars } from "react-icons/fa";
 import {
   AuthenticityTokenProvider,
   createAuthenticityToken,
@@ -98,7 +98,7 @@ export default function App() {
                     ariaLabel="Toggle sidebar"
                     onClick={() => setSidebarOpen(!sidebarOpen)}
                   >
-                    <FaBars />
+                    <MenuIcon />
                   </Button>
                 </div>
               </Navbar>
