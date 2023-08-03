@@ -1,7 +1,9 @@
 import Button from "./components/Button";
 import Layout from "./components/Layout";
 import Footer from "./components/Layout/Footer";
+import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -105,7 +107,12 @@ export default function App() {
             }
             footer={<Footer />}
           >
-            <Outlet />
+            <Sidebar isOpen={sidebarOpen} content={<Outlet />}>
+              <Menu>
+                <Menu.Item to="/">Home</Menu.Item>
+                <Menu.Item to="/about">About</Menu.Item>
+              </Menu>
+            </Sidebar>
           </Layout>
           <ScrollRestoration />
           <Scripts />
