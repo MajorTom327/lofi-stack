@@ -2,7 +2,7 @@ export type Colors =
   | "primary"
   | "secondary"
   | "accent"
-  | "danger"
+  | "error"
   | "info"
   | "success"
   | "warning"

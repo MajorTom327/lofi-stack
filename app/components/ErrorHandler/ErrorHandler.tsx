@@ -1,13 +1,8 @@
-import {
-  Links,
-  Meta,
-  isRouteErrorResponse,
-  useRouteError,
-} from "@remix-run/react";
-import React from "react";
-
 import GeneralErrorHandler from "./GeneralErrorHandler";
 import { RouteErrorHandler } from "./RouteErrorHandler";
+import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
+import React from "react";
+import useMatchesData from "~/hooks/useMatchesData";
 
 type Props = {};
 

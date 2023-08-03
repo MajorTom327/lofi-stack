@@ -1,11 +1,9 @@
+import Button from "../Button";
+import errorImage from "./error.jpeg";
 import { Links, Meta } from "@remix-run/react";
 import type { ErrorResponse } from "@remix-run/router";
 import React from "react";
-
 import Card from "~/components/Card";
-
-import Button from "../Button";
-import errorImage from "./error.jpeg";
 
 type Props = {
   error: ErrorResponse;
@@ -33,7 +31,9 @@ export const RouteErrorHandler: React.FC<Props> = ({ error }) => {
               <h1 className="text-4xl">{error.status}</h1>
               <h2 className="text-2xl">{error.statusText}</h2>
               <Card.Actions>
-                <Button to="/">Go back to the home page</Button>
+                <Button color="primary" to="/">
+                  Go back to the home page
+                </Button>
               </Card.Actions>
             </Card>
           </div>

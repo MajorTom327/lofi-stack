@@ -1,8 +1,6 @@
 import { isNotNilOrEmpty } from "ramda-adjunct";
 import React from "react";
 
-import { isDevelopment } from "~/lib/isEnv";
-
 type Props = {
   error: any;
 };
@@ -18,7 +16,7 @@ export const GeneralErrorHandler: React.FC<Props> = ({ error }) => {
               {error.message || "Something goes wrong !"}
             </h2>
           </div>
-          {isDevelopment() && isNotNilOrEmpty(error.stack) && (
+          {isNotNilOrEmpty(error.stack) && (
             <pre>
               <code>{error.stack}</code>
             </pre>

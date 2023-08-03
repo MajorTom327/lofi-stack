@@ -1,6 +1,8 @@
 import { getImageUrl } from "../Image/Image";
+import { useLocation } from "@remix-run/react";
 import classNames from "classnames";
 import React, { useMemo } from "react";
+import { useEnvValue } from "~/hooks/useEnv";
 import { Colors } from "~/refs";
 
 type Props = {
@@ -18,6 +20,8 @@ export const Card: React.FC<Props> = ({
   imgAlt,
   color,
 }) => {
+  const env = useEnvValue("NODE_ENV");
+
   const classes = classNames(
     "border rounded-lg shadow",
     {

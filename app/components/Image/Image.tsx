@@ -1,7 +1,7 @@
-import { pathOr, propOr } from "ramda";
+import { useLocation } from "@remix-run/react";
+import { pathEq, pathOr, propEq, propOr } from "ramda";
+import { isNilOrEmpty } from "ramda-adjunct";
 import React from "react";
-
-import { isDevelopment } from "~/lib/isEnv";
 
 type Props = {
   src: string;
@@ -15,16 +15,20 @@ const imageWidths: ImageWidth[] = [640, 750, 828, 1080, 1200];
 type Options = Partial<{
   width: ImageWidth;
   quality: number;
+  env: "development" | "production";
 }>;
 
 export const getImageUrl = (src: string, options?: Options) => {
-  if (isDevelopment()) {
+  let origin = "";
+  try {
+    origin = window.location.origin.toString();
+  } catch (e) {}
+
+  if (origin.includes("localhost") || isNilOrEmpty(origin)) {
     return src;
   }
 
-  const appUrl = pathOr("http://localhost:3000", ["env", "APP_URL"], process);
-
-  const url = new URL("/_vercel/image", appUrl);
+  const url = new URL("/_vercel/image", origin);
 
   url.searchParams.append("url", src);
 

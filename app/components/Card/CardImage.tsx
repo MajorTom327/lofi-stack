@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
-
 import { getImageUrl } from "../Image/Image";
+import { useLocation } from "@remix-run/react";
+import React, { useMemo } from "react";
 
 type Props = {
   src: string;

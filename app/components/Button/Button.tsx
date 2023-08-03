@@ -11,6 +11,7 @@ type Props = {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   color?: Colors;
+  circle?: boolean;
   ariaLabel?: string;
 } & WithAction;
 
@@ -22,6 +23,7 @@ export const Button: React.FC<Props> = ({
   to,
   onClick,
   color,
+  circle,
   ariaLabel,
 }) => {
   const classes = classNames(
@@ -34,8 +36,8 @@ export const Button: React.FC<Props> = ({
         color === "secondary",
       "bg-accent text-accent-content border-accent hover:bg-accent-active":
         color === "accent",
-      "bg-danger text-danger-content border-danger hover:bg-danger-active":
-        color === "danger",
+      "bg-error text-error-content border-error hover:bg-error-active":
+        color === "error",
       "bg-info text-info-content border-info hover:bg-info-active":
         color === "info",
       "bg-success text-success-content border-success hover:bg-success-active":
@@ -44,6 +46,8 @@ export const Button: React.FC<Props> = ({
         color === "warning",
       "text-neutral-content border-none hover:bg-base-200/30":
         color === "ghost" || !color,
+      "w-10 h-10 rounded-full text-center items-center justify-center !p-0 flex":
+        circle,
     },
     className
   );
