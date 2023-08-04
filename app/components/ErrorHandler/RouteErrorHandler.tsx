@@ -31,9 +31,15 @@ export const RouteErrorHandler: React.FC<Props> = ({ error }) => {
               <h1 className="text-4xl">{error.status}</h1>
               <h2 className="text-2xl">{error.statusText}</h2>
               <Card.Actions>
-                <Button color="primary" to="/">
-                  Go back to the home page
-                </Button>
+                {error.status === 401 ? (
+                  <Button color="primary" to="/login">
+                    Login
+                  </Button>
+                ) : (
+                  <Button color="primary" to="/">
+                    Go back to the home page
+                  </Button>
+                )}
               </Card.Actions>
             </Card>
           </div>

@@ -44,6 +44,7 @@ export const Button: React.FC<Props> = ({
         color === "success",
       "bg-warning text-warning-content border-warning hover:bg-warning-active":
         color === "warning",
+      "text-neutral/20 hover:text-neutral/80 border-none": color === "neutral",
       "text-neutral-content border-none hover:bg-base-200/30":
         color === "ghost" || !color,
       "w-10 h-10 rounded-full text-center items-center justify-center !p-0 flex":
@@ -65,18 +66,17 @@ export const Button: React.FC<Props> = ({
         {children}
       </Link>
     ))
-    .with({ onClick: P.not(P.nullish) }, ({ onClick }) => (
+    .otherwise(({ onClick }) => (
       <button
         className={classes}
-        type={type}
+        type={type || "button"}
         onClick={onClick}
         aria-label={ariaLabel}
         disabled={disabled}
       >
         {children}
       </button>
-    ))
-    .exhaustive();
+    ));
 
   return isNotNilOrEmpty(content) ? content : null;
 };

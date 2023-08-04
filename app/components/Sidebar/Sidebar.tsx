@@ -22,7 +22,7 @@ export const Sidebar: React.FC<Props> = ({ children, content, isOpen }) => {
           </div>
         )}
         <div
-          className={classNames("py-2 px-2", {
+          className={classNames("p-2", {
             "col-span-3": isOpen,
           })}
         >

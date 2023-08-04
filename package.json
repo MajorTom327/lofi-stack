@@ -15,6 +15,7 @@
     "format-code": "npm run prettier:fix & npm run lint:fix"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.1",
     "@remix-run/css-bundle": "*",
     "@remix-run/node": "*",
     "@remix-run/react": "*",
@@ -28,6 +29,10 @@
     "ramda-adjunct": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.2",
+    "remix-auth": "^3.5.0",
+    "remix-auth-form": "^1.3.0",
+    "remix-hook-form": "^1.1.2",
     "remix-utils": "^6.3.0",
     "ts-pattern": "^5.0.4",
     "zod": "^3.21.4"

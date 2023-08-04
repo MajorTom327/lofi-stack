@@ -8,28 +8,24 @@ type Props = {
 } & WithAction;
 
 export const MenuItem: React.FC<Props> = ({ children, to, onClick }) => {
-  const classes = classNames(
-    "p-2 hover:bg-neutral/20 transition cursor-pointer"
-  );
+  const classes = classNames("px-4 py-2 hover:bg-neutral/20 transition w-full");
 
   const content = match({ to, onClick } as WithAction)
     .with({ to: P.string }, ({ to }) => (
-      <Link to={to} prefetch="intent">
-        {" "}
+      <Link to={to} prefetch="intent" className={classes}>
         {children}{" "}
       </Link>
     ))
-    .with({ onClick: P.not(P.nullish) }, ({ onClick }) => (
-      <button onClick={onClick} type="button">
+    .otherwise(({ onClick }) => (
+      <button onClick={onClick} type="button" className={classes}>
         {" "}
         {children}{" "}
       </button>
-    ))
-    .exhaustive();
+    ));
 
   return (
     <>
-      <li className={classes}>{content}</li>
+      <li className="flex">{content}</li>
     </>
   );
 };
