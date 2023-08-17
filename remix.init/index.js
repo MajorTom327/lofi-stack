@@ -65,6 +65,13 @@ updates:
       },
       {
         type: "confirm",
+        name: "updateDependencies",
+        message: "Update all dependencies?",
+        default: true,
+        when: (answers) => answers.dependenciesManager === "yarn",
+      },
+      {
+        type: "confirm",
         name: "dependabot",
         message: "Do you want to add dependabot?",
         default: true,
@@ -212,10 +219,8 @@ updates:
 
       fs.writeFileSync(getPath("app/root.tsx"), newRootContent);
 
-      if (answers.dependenciesManager === "yarn") {
-        spinner.text = "Installing dependencies with yarn";
-
-        await new Promise((resolve, reject) => {
+      const execAsync = (command) => {
+        return new Promise((resolve, reject) => {
           exec(
             "yarn import",
             {
@@ -230,6 +235,17 @@ updates:
             }
           );
         });
+      };
+
+      if (answers.dependenciesManager === "yarn") {
+        spinner.text = "Installing dependencies with yarn";
+
+        await execAsync("yarn import");
+
+        if (answers.updateDependencies) {
+          spinner.text = "Updating dependencies";
+          await execAsync("yarn upgrade --latest");
+        }
       }
 
       // ! This should be the last step as we git-add all the files
