@@ -6,6 +6,7 @@ export type Colors =
   | "info"
   | "success"
   | "warning"
-  | "ghost";
+  | "ghost"
+  | "neutral";
 
 export default Colors;
