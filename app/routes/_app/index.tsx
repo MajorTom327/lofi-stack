@@ -1,9 +1,6 @@
 import type { LoaderArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
-import React from "react";
 import { authenticator } from "~/services/auth.server";
-
-type Props = {};
 
 export const loader = async ({ request }: LoaderArgs) => {
   await authenticator.isAuthenticated(request, { failureRedirect: "/login" });
@@ -11,7 +8,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   return null;
 };
 
-export const Index: React.FC<Props> = ({}) => {
+export const Index = () => {
   return (
     <>
       <div className="container mx-auto">
@@ -20,7 +17,5 @@ export const Index: React.FC<Props> = ({}) => {
     </>
   );
 };
-
-Index.defaultProps = {};
 
 export default Index;
