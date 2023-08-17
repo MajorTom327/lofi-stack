@@ -102,10 +102,6 @@ updates:
         path.resolve(cwd, ".env")
       );
 
-      if (answers.dependenciesManager === "yarn") {
-        fs.unlinkSync(path.resolve(cwd, "package-lock.json"));
-      }
-
       await new Promise((resolve, reject) => {
         return fs.readFile(
           path.resolve(cwd, ".env"),
@@ -221,7 +217,7 @@ updates:
 
         await new Promise((resolve, reject) => {
           exec(
-            "yarn install",
+            "yarn import",
             {
               cwd,
               stdio: "ignore",
