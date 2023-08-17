@@ -27,6 +27,7 @@ export const Dialog: React.FC<Props> = ({ open, children, onClose }) => {
     <>
       <dialog ref={ref} className={dialogClasses}>
         <Button
+          ariaLabel="Close dialog"
           color="neutral"
           circle
           onClick={onClose}
