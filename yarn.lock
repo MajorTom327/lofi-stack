@@ -4349,10 +4349,10 @@ gunzip-maybe@^1.4.2:
     pumpify "^1.3.3"
     through2 "^2.0.3"
 
-happy-dom@^10.5.2:
-  version "10.10.0"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-10.10.0.tgz#46cb9755e51032595556c50edee778149caf7b90"
-  integrity sha512-rpWFSemZoid3OKuzMs47CDUOnAYV10vYlXaVBPD+dBDHTAFkyIIpkHXx8gd/uWMyf+XOluQNnxImWp17SprE2Q==
+happy-dom@^10.11.0:
+  version "10.11.0"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-10.11.0.tgz#8deec1a62624c392ae577cba2216a8392024692b"
+  integrity sha512-CmUT4LOLzvAsbYqgTJESrPyvF0gxLDkDG/KK1o/HYU7+c9o/VVIKXl3feJZnuCYbGqemw7meiQaZcL4SMgn1jQ==
   dependencies:
     css.escape "^1.5.1"
     entities "^4.5.0"
