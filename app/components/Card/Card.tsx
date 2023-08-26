@@ -29,7 +29,7 @@ export const Card: React.FC<Props> = ({
       "border-secondary bg-secondary text-secondary-content":
         color === "secondary",
       "border-accent bg-accent text-accent-content": color === "accent",
-      "border-danger bg-danger text-danger-content": color === "danger",
+      "border-danger bg-danger text-danger-content": color === "error",
       "border-info bg-info text-info-content": color === "info",
       "border-success bg-success text-success-content": color === "success",
       "border-warning bg-warning text-warning-content": color === "warning",
