@@ -240,6 +240,7 @@ updates:
       if (answers.dependenciesManager === "yarn") {
         spinner.text = "Installing dependencies with yarn";
 
+        fs.unlinkSync(path.resolve(cwd, "package-lock.json"));
         await execAsync("yarn import");
 
         if (answers.updateDependencies) {
