@@ -1,7 +1,7 @@
 // Refer to https://github.com/sergiodxa/remix-auth-form for more information
 import { FormStrategy } from "remix-auth-form";
 import zod from "zod";
-import User, { IUser } from "~/models/User";
+import { Users, IUser } from "~/models";
 
 const schema = zod.object({
   email: zod.string().email(),
@@ -10,15 +10,21 @@ const schema = zod.object({
 
 export const formStrategy = new FormStrategy<IUser>(
   async ({ form, context }) => {
-    // Do something with the tokens and profile
+    const formData = form.get("formData")?.toString();
 
     try {
-      const data = schema.parse(Object.fromEntries(form.entries()));
+      const data = schema.parse(JSON.parse(formData ?? "{}"));
 
       console.log(data);
       // Return the user object
 
-      const user = User.login(data.email, data.password);
+      console.log(Users.users);
+
+      const user = Users.login(data.email, data.password);
+
+      if (!user) {
+        return Promise.reject(null);
+      }
 
       return user;
     } catch (e) {

@@ -1,40 +1,80 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { LoaderArgs } from "@remix-run/node";
-import { useFetcher } from "@remix-run/react";
-import Button from "~/components/Button";
-import Card from "~/components/Card";
-import Input from "~/components/Input";
+import { Form, useFetcher } from "@remix-run/react";
+import { Github } from "lucide-react";
+import { RemixFormProvider, useRemixForm } from "remix-hook-form";
+import z from "zod";
+import BaseInput from "~/components/Input";
+import { Button } from "~/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import { authenticator } from "~/services/auth.server";
 import { AuthStrategies } from "~/services/auth_strategies";
 
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+type FormData = z.infer<typeof schema>;
+
+export const formLoginResolver = zodResolver(schema);
+
 export const loader = async ({ request }: LoaderArgs) => {
   await authenticator.isAuthenticated(request, {
-    successRedirect: "/dashboard",
+    successRedirect: "/",
   });
   return null;
 };
 
 export default function LoginRoute() {
-  const fetcher = useFetcher();
+  const formMethods = useRemixForm({
+    mode: "onSubmit",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    submitConfig: {
+      action: `/auth/${AuthStrategies.FORM}`,
+      method: "POST",
+    },
+    resolver: formLoginResolver,
+  });
 
   return (
     <>
       <div className="container mx-auto">
         <Card>
-          <Card.Title>Login</Card.Title>
-          <fetcher.Form
-            action={`/auth/${AuthStrategies.FORM}`}
-            method="POST"
-            className="flex flex-col gap-2"
-          >
-            <Input required name="email" type="email" label="Email" />
-            <Input.Password required name="password" label="Password" />
-
-            <Card.Actions>
-              <Button color="primary" type="submit">
-                Connect
-              </Button>
-            </Card.Actions>
-          </fetcher.Form>
+          <CardHeader>
+            <CardTitle>Login</CardTitle>
+          </CardHeader>
+          <RemixFormProvider {...formMethods}>
+            <Form
+              onSubmit={formMethods.handleSubmit}
+              className="flex flex-col gap-2"
+            >
+              <CardContent>
+                <BaseInput required name="email" type="email" label="Email" />
+                <BaseInput.Password
+                  required
+                  name="password"
+                  label="Password"
+                  togglable
+                />
+              </CardContent>
+              <CardFooter className="flex justify-end gap-2">
+                <Button to="/signup" variant="secondary">
+                  Sign up
+                </Button>
+                <Button type="submit">Let's do it</Button>
+              </CardFooter>
+            </Form>
+          </RemixFormProvider>
         </Card>
       </div>
     </>

@@ -1,53 +1,76 @@
 /** @type {import('tailwindcss').Config} */
-
-const chroma = require("chroma-js");
-const R = require("ramda");
-
-const baseColors = {
-  primary: "#570DF8",
-  secondary: "#F000B8",
-  accent: "#37CDBE",
-  neutral: "#1e293b",
-  "base-100": "#f8fafc",
-  "base-200": "#e2e8f0",
-  "base-300": "#94a3b8",
-  info: "#3ABFF8",
-  success: "#36D399",
-  warning: "#FBBD23",
-  error: "#F87272",
-};
-
-const fullPalette = R.keys(baseColors).reduce((acc, key) => {
-  const baseColor = R.prop(key, baseColors);
-
-  const color = chroma(baseColor);
-  const content =
-    chroma.contrast(color, "white") > 2
-      ? R.prop("base-100", baseColors)
-      : R.prop("neutral", baseColors);
-
-  const active = color.darken(0.5).hex();
-
-  return R.compose(
-    R.assoc(key, color.hex()),
-    R.assoc(`${key}-content`, content),
-    R.assoc(`${key}-active`, active)
-  )(acc);
-}, {});
-
 module.exports = {
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  darkMode: ["class"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
-        ...fullPalette,
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-
-  // daisyui: {
-  //   themes: [{ light: lightTheme, dark: darkTheme }],
-  // },
-
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };

@@ -1,65 +1,52 @@
+import { v4 as uuid } from "uuid";
 import zod from "zod";
 
-export interface IUser {
-  id?: string;
-  username: string;
-  email: string;
-  password: string; // HASHED
-
-  save(): void;
-}
-
-const schema = zod.object({
-  id: zod.string().optional(),
-  username: zod.string(),
+const createUserInput = zod.object({
   email: zod.string().email(),
   password: zod.string().min(8),
 });
 
-export class User implements IUser {
-  id?: string;
-  username: string;
-  email: string;
-  password: string;
+const userSchema = zod.object({
+  id: zod.string(),
+  email: zod.string().email(),
+  password: zod.string().min(8),
+});
 
-  constructor(user: any) {
-    const parsed = schema.parse(user);
+export type IUser = zod.infer<typeof userSchema>;
 
-    this.id = parsed.id;
-    this.username = parsed.username;
-    this.email = parsed.email;
-    this.password = parsed.password;
+export class User {
+  users: IUser[] = [
+    {
+      id: "1",
+      email: "jconnor@sky.net",
+      password: "password",
+    },
+  ];
+
+  create(input: any) {
+    const user = createUserInput.parse(input);
+
+    this.users.push({ id: uuid(), ...user });
+    return user;
   }
 
-  public static create(email: string, password: string): IUser {
-    throw new Error("Method not implemented.");
-  }
-
-  public static login(email: string, password: string): IUser {
-    if (email === "jconnor@sky.net" && password === "12345678") {
-      return new User({
-        id: "1",
-        username: "jconnor",
-        email: "jconnor@sky.net",
-        password: "12345678",
-      });
+  login(email: string, password: string) {
+    const user = this.users.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (!user) {
+      throw new Error("User not found");
     }
-    throw new Error("Method not implemented.");
+    return user;
   }
 
-  public static get(id: string): IUser {
-    throw new Error("Method not implemented.");
+  get(id: string) {
+    const user = this.users.find((user) => user.id === id);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user;
   }
-
-  public static getPage(page: number, limit: number = 10): IUser[] {
-    throw new Error("Method not implemented.");
-  }
-
-  public static search(query: string): IUser[] {
-    throw new Error("Method not implemented.");
-  }
-
-  public save(): void {}
 }
 
 export default User;

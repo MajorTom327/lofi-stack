@@ -1,4 +1,4 @@
-import Input, { InputProps } from "./Input";
+import BaseInput, { InputProps } from "./Input";
 import React from "react";
 
 type Props = Omit<InputProps, "type">;
@@ -6,7 +6,7 @@ type Props = Omit<InputProps, "type">;
 export const InputPhone: React.FC<Props> = (props) => {
   return (
     <>
-      <Input {...props} type={"phone"} />
+      <BaseInput {...props} type={"phone"} />
     </>
   );
 };

@@ -1,14 +1,16 @@
-import Button from "./components/Button";
 import Layout from "./components/Layout";
 import Footer from "./components/Layout/Footer";
 import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import { Button } from "./components/ui/button";
+import { authenticator } from "./services/auth.server";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import type { V2_MetaFunction } from "@remix-run/node";
 import {
+  Form,
   Links,
   LiveReload,
   Meta,
@@ -31,7 +33,7 @@ import baseStyle from "~/index.css";
 import { sessionStorage } from "~/services/session.server";
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: "New Remix App" }];
+  return [{ title: "seeker" }];
 };
 
 export const links: LinksFunction = () => [
@@ -44,6 +46,8 @@ export const loader: LoaderFunction = async ({ request }) => {
   );
 
   const csrf = createAuthenticityToken(session);
+
+  const user = await authenticator.isAuthenticated(request);
 
   // * Set here the publics env variables
   const env = keys(process.env)
@@ -60,7 +64,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     }, {});
 
   return json(
-    { csrf, env },
+    { csrf, env, user },
     {
       headers: {
         "Set-Cookie": await sessionStorage.commitSession(session),
@@ -70,7 +74,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function App() {
-  const { csrf, env } = useLoaderData<typeof loader>();
+  const { csrf, env, user } = useLoaderData<typeof loader>();
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
@@ -92,27 +96,40 @@ export default function App() {
                       {env.APP_NAME}
                     </Button>
                   </Navbar.Brand>
-                  <Button
-                    color="ghost"
-                    className={classNames({
-                      "opacity-25 hover:opacity-80": sidebarOpen,
-                    })}
-                    ariaLabel="Toggle sidebar"
-                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                  >
-                    <MenuIcon />
-                  </Button>
+                  {user && (
+                    <Button
+                      aria-label="Toggle sidebar"
+                      onClick={() => setSidebarOpen(!sidebarOpen)}
+                      className={classNames("transition", {
+                        "opacity-25 hover:opacity-80": sidebarOpen,
+                      })}
+                    >
+                      <MenuIcon />
+                    </Button>
+                  )}
                 </div>
+                {user && (
+                  <div className="flex gap-2">
+                    <Button to="/profile">{user.username}</Button>
+                    <Form method="POST" action="/logout">
+                      <Button type="submit">Logout</Button>
+                    </Form>
+                  </div>
+                )}
               </Navbar>
             }
             footer={<Footer />}
           >
-            <Sidebar isOpen={sidebarOpen} content={<Outlet />}>
-              <Menu>
-                <Menu.Item to="/">Home</Menu.Item>
-                <Menu.Item to="/about">About</Menu.Item>
-              </Menu>
-            </Sidebar>
+            {user ? (
+              <Sidebar isOpen={sidebarOpen} content={<Outlet />}>
+                <Menu>
+                  <Menu.Item to="/">Home</Menu.Item>
+                  <Menu.Item to="/about">About</Menu.Item>
+                </Menu>
+              </Sidebar>
+            ) : (
+              <Outlet />
+            )}
           </Layout>
           <ScrollRestoration />
           <Scripts />

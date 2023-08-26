@@ -10,7 +10,7 @@ export const loader = ({ request, params }: LoaderArgs) => {
   const provider = params.provider as AuthStrategy;
 
   return authenticator.authenticate(provider, request, {
-    successRedirect: "/dashboard",
+    successRedirect: "/",
     failureRedirect: "/login",
   });
 };

@@ -1,4 +1,5 @@
 import { useLocation } from "@remix-run/react";
+import classNames from "classnames";
 import { pathEq, pathOr, propEq, propOr } from "ramda";
 import { isNilOrEmpty } from "ramda-adjunct";
 import React from "react";
@@ -6,6 +7,7 @@ import React from "react";
 type Props = {
   src: string;
   alt?: string;
+  className?: string;
 };
 
 type ImageWidth = 640 | 750 | 828 | 1080 | 1200;
@@ -41,7 +43,8 @@ export const getImageUrl = (src: string, options?: Options) => {
   return url.toString();
 };
 
-export const Image: React.FC<Props> = ({ src, alt }) => {
+export const Image: React.FC<Props> = ({ src, alt, className }) => {
+  const classes = classNames(className);
   return (
     <>
       <picture>
@@ -50,9 +53,10 @@ export const Image: React.FC<Props> = ({ src, alt }) => {
             key={width}
             srcSet={getImageUrl(src, { width })}
             media={`(min-width: ${width}px)`}
+            className={classes}
           />
         ))}
-        <img src={getImageUrl(src)} alt={alt} />
+        <img src={getImageUrl(src)} alt={alt} className={classes} />
       </picture>
     </>
   );

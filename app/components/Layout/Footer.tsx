@@ -1,3 +1,4 @@
+import { Separator } from "../ui/separator";
 import classNames from "classnames";
 import React from "react";
 import { useEnvValue } from "~/hooks/useEnv";
@@ -8,7 +9,7 @@ type Props = {
 
 export const Footer: React.FC<Props> = ({ className }) => {
   const footerClasses = classNames(
-    "bg-base-300 text-base-300-content p-4",
+    "bg-primary text-primary-foreground p-4",
     className
   );
 
@@ -17,7 +18,7 @@ export const Footer: React.FC<Props> = ({ className }) => {
   return (
     <>
       <footer className={footerClasses}>
-        <div className="container mx-auto">
+        <div className="container mx-auto my-2">
           <div className="flex justify-center gap-6">
             <div>
               {appName} &copy; 2023 - {new Date().getFullYear()}

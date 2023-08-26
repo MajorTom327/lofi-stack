@@ -3,7 +3,9 @@ import { Outlet } from "@remix-run/react";
 import { authenticator } from "~/services/auth.server";
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await authenticator.isAuthenticated(request, { failureRedirect: "/login" });
+  await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
 
   return null;
 };
@@ -11,7 +13,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 export const Index = () => {
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container mx-auto my-2">
         <Outlet />
       </div>
     </>

@@ -8,7 +8,7 @@ type Props = {
 } & WithAction;
 
 export const MenuItem: React.FC<Props> = ({ children, to, onClick }) => {
-  const classes = classNames("px-4 py-2 hover:bg-neutral/20 transition w-full");
+  const classes = classNames("px-4 py-2 hover:bg-primary/20 transition w-full");
 
   const content = match({ to, onClick } as WithAction)
     .with({ to: P.string }, ({ to }) => (

@@ -1,22 +1,16 @@
-import { createCookieSessionStorage } from "@vercel/remix";
-import assert from "node:assert";
-import { isNil } from "ramda";
+import { createCookieSessionStorage } from "@remix-run/node";
 
-import { isProduction } from "~/lib/isEnv";
-
-const sessionSecret = process.env.SESSION_SECRET;
-
-assert(!isNil(sessionSecret), "SESSION_SECRET is not defined");
-
+// export the whole sessionStorage object
 export const sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: "__session",
-    httpOnly: true,
-    path: "/",
-    sameSite: "lax",
-    secrets: [sessionSecret!],
-    secure: isProduction(),
+    name: "_session", // use any name you want here
+    sameSite: "lax", // this helps with CSRF
+    path: "/", // remember to add this so the cookie will work in all routes
+    httpOnly: true, // for security reasons, make this cookie http only
+    secrets: [process.env.SESSION_SECRET], // replace this with an actual secret
+    secure: process.env.NODE_ENV === "production", // enable this in prod only
   },
 });
 
-export let { getSession, commitSession, destroySession } = sessionStorage;
+// you can also export the methods individually for your own usage
+export const { getSession, commitSession, destroySession } = sessionStorage;

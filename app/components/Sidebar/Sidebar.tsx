@@ -17,7 +17,7 @@ export const Sidebar: React.FC<Props> = ({ children, content, isOpen }) => {
         })}
       >
         {isOpen && (
-          <div className="min-h-screen bg-base-200 text-base-200-content shadow">
+          <div className="min-h-screen bg-secondary text-secondary-foreground shadow">
             {children}
           </div>
         )}
