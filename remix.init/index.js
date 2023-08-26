@@ -240,7 +240,11 @@ updates:
       if (answers.dependenciesManager === "yarn") {
         spinner.text = "Installing dependencies with yarn";
 
-        await execAsync("yarn import");
+        try {
+          await execAsync("yarn import");
+        } catch (e) {
+          // Ignore if can't import
+        }
 
         if (answers.updateDependencies) {
           spinner.text = "Updating dependencies";
