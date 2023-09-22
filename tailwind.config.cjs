@@ -27,7 +27,8 @@ const colorModifier = {
 
 const toLight = (color) => chroma(color).brighten(colorModifier.light).hex();
 const toDark = (color) => chroma(color).darken(colorModifier.light).hex();
-const getContentColor = (color) => {
+const getContentColor = (colorHex) => {
+  const color = chroma(colorHex);
   const originalHue = chroma(color).get("hsl.h");
   const oppositeHue = (originalHue + 180) % 360;
   const oppositeColor = chroma.hsl(
