@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
-    "@remix-run/dev": "^1.19.3",
+    "@remix-run/dev": "^2.0.1",
     "@remix-run/eslint-config": "^1.19.3",
     "@remix-run/serve": "^1.19.3",
     "@testing-library/dom": "^9.3.1",
