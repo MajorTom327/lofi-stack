@@ -1,8 +1,9 @@
 import { Slot } from "@radix-ui/react-slot";
 import { Link } from "@remix-run/react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
-import { match, P } from "ts-pattern";
+import { P, match } from "ts-pattern";
+
 import { cn } from "~/lib/utils";
 
 const buttonVariants = cva(
@@ -11,8 +12,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        info: "bg-info text-info-foreground hover:bg-info/90",
+        success: "bg-success text-success-foreground hover:bg-success/90",
+        warning: "bg-warning text-warning-foreground hover:bg-warning/90",
+        error: "bg-error text-error-foreground hover:bg-error/90",
+
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:

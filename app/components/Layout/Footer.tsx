@@ -1,7 +1,9 @@
-import { Separator } from "../ui/separator";
 import classNames from "classnames";
 import React from "react";
+
 import { useEnvValue } from "~/hooks/useEnv";
+
+import { Separator } from "../ui/separator";
 
 type Props = {
   className?: string;

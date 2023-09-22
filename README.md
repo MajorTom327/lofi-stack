@@ -12,8 +12,15 @@ Like:
 - [Ramda](https://ramdajs.com/)
 - [Ramda-Adjunct](https://char0n.github.io/ramda-adjunct/)
 - [Remix-Utils](https://github.com/sergiodxa/remix-utils)
+- [shadcn-ui](https://ui.shadcn.com/)
 
 This include a basic configuration for vercel
+
+## Getting Started
+
+```shell
+npx create-remix@latest --package-manager yarn -y --template majortom327/lofi-stack --token $GH_TOKEN
+```
 
 ## Deployment
 

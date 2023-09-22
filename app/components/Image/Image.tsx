@@ -1,23 +1,21 @@
-import { useLocation } from "@remix-run/react";
 import classNames from "classnames";
-import { pathEq, pathOr, propEq, propOr } from "ramda";
+import { propOr } from "ramda";
 import { isNilOrEmpty } from "ramda-adjunct";
 import React from "react";
-
-type Props = {
-  src: string;
-  alt?: string;
-  className?: string;
-};
 
 type ImageWidth = 640 | 750 | 828 | 1080 | 1200;
 
 const imageWidths: ImageWidth[] = [640, 750, 828, 1080, 1200];
 
+type Props = {
+  src: string;
+  alt?: string;
+  className?: string | string[] | { [key: string]: boolean };
+};
+
 type Options = Partial<{
   width: ImageWidth;
   quality: number;
-  env: "development" | "production";
 }>;
 
 export const getImageUrl = (src: string, options?: Options) => {
@@ -34,7 +32,7 @@ export const getImageUrl = (src: string, options?: Options) => {
 
   url.searchParams.append("url", src);
 
-  const width: number = propOr(1200, "width", options);
+  const width: ImageWidth = propOr(1200, "width", options);
   const quality: number = propOr(75, "quality", options);
 
   url.searchParams.append("w", width.toString());

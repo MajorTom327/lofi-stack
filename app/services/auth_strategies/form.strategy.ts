@@ -1,7 +1,10 @@
 // Refer to https://github.com/sergiodxa/remix-auth-form for more information
+import { isNilOrEmpty } from "ramda-adjunct";
+import { AuthorizationError } from "remix-auth";
 import { FormStrategy } from "remix-auth-form";
 import zod from "zod";
-import { Users, IUser } from "~/models";
+import { UserController } from "~/controllers";
+import type { IUser } from "~/models";
 
 const schema = zod.object({
   email: zod.string().email(),
@@ -9,27 +12,21 @@ const schema = zod.object({
 });
 
 export const formStrategy = new FormStrategy<IUser>(
-  async ({ form, context }) => {
-    const formData = form.get("formData")?.toString();
-
+  async ({ form }): Promise<IUser> => {
     try {
-      const data = schema.parse(JSON.parse(formData ?? "{}"));
+      const formData = Object.fromEntries(form.entries());
+      const data = schema.parse(formData);
 
-      console.log(data);
-      // Return the user object
+      const userController = new UserController();
+      const user = await userController.login(data.email, data.password);
 
-      console.log(Users.users);
-
-      const user = Users.login(data.email, data.password);
-
-      if (!user) {
-        return Promise.reject(null);
+      if (isNilOrEmpty(user)) {
+        throw new AuthorizationError("Invalid credentials");
       }
-
-      return user;
+      return user!;
     } catch (e) {
       console.log(e);
-      return Promise.reject(null);
+      throw new AuthorizationError("Invalid credentials");
     }
   }
 );

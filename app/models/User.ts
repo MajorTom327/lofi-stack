@@ -1,51 +1,61 @@
-import { v4 as uuid } from "uuid";
+import type { PrismaClient } from "@prisma/client";
+import SHA512 from "crypto-js/sha512";
+import { evolve } from "ramda";
 import zod from "zod";
-
-const createUserInput = zod.object({
-  email: zod.string().email(),
-  password: zod.string().min(8),
-});
 
 const userSchema = zod.object({
   id: zod.string(),
+
   email: zod.string().email(),
   password: zod.string().min(8),
+
+  createdAt: zod.coerce.date(),
+  updatedAt: zod.coerce.date(),
+});
+
+const createUserInput = userSchema.omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
 });
 
 export type IUser = zod.infer<typeof userSchema>;
 
 export class User {
-  users: IUser[] = [
-    {
-      id: "1",
-      email: "jconnor@sky.net",
-      password: "password",
-    },
-  ];
+  client: PrismaClient;
+  constructor(client: PrismaClient) {
+    this.client = client;
+  }
 
-  create(input: any) {
+  private hashPassword(password: string) {
+    return SHA512(password).toString();
+  }
+
+  create(input: any): Promise<IUser> {
     const user = createUserInput.parse(input);
 
-    this.users.push({ id: uuid(), ...user });
-    return user;
+    return this.client.user.create({
+      data: evolve({ password: this.hashPassword }, user),
+    });
   }
 
-  login(email: string, password: string) {
-    const user = this.users.find(
-      (user) => user.email === email && user.password === password
-    );
-    if (!user) {
-      throw new Error("User not found");
-    }
-    return user;
+  async login(email: string, password: string): Promise<IUser | null> {
+    const user = await this.client.user.findUnique({
+      where: {
+        email: email,
+        password: this.hashPassword(password),
+      },
+    });
+
+    return user as IUser | null;
   }
 
-  get(id: string) {
-    const user = this.users.find((user) => user.id === id);
-    if (!user) {
-      throw new Error("User not found");
-    }
-    return user;
+  get(id: string): Promise<IUser | null> {
+    return this.client.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
   }
 }
 

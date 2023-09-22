@@ -5,10 +5,11 @@ const { v4: uuidV4 } = require("uuid");
 const { execSync, exec } = require("child_process");
 // const ora = require('ora')
 const { match } = require("ts-pattern");
+const { always } = require("ramda");
 
 const ora = (str) => import("ora").then(({ default: ora }) => ora(str));
 
-const main = async ({ rootDirectory }) => {
+const main = async ({ rootDirectory, packageManager }) => {
   console.log("🚀  Initializing your project...");
   const cwd = path.resolve(rootDirectory);
 
@@ -61,6 +62,7 @@ updates:
         name: "dependenciesManager",
         message: "Which dependencies manager do you want to use?",
         choices: ["yarn", "npm"],
+        when: always(packageManager === "yarn"),
         loop: true,
       },
       {
@@ -166,6 +168,15 @@ updates:
         .catch((err) => {
           console.error("Something goes wrong on setting up env...", err);
         });
+
+      fs.unlinkSync(path.resolve(cwd, ".gitignore"));
+
+      if (answers.git) {
+        fs.copyFileSync(
+          path.resolve(cwd, "remix.init", "gitignore.dist"),
+          path.resolve(cwd, ".gitignore")
+        );
+      }
 
       if (answers.git && answers.husky) {
         const pkg = require(path.resolve(cwd, "package.json"));
