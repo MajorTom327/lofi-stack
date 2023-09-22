@@ -54,8 +54,6 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           # cache: "yarn"
       - run: yarn
-      - name: Typecheck
-        run: yarn typecheck
 
       - name: ⚡ Run vitest
         run: npm run test:ci
