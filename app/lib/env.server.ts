@@ -8,6 +8,8 @@ export const publicEnvSchema = zod.object({
 export const envSchema = zod
   .object({
     NODE_ENV: zod.enum(["development", "production", "test"]),
+    APP_NAME: zod.string().default("My App"),
+    APP_KEY: zod.string(),
     SESSION_SECRET: zod.string().uuid(),
   })
   .merge(publicEnvSchema);

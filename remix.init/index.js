@@ -58,21 +58,6 @@ updates:
   await inquirer
     .prompt([
       {
-        type: "list",
-        name: "dependenciesManager",
-        message: "Which dependencies manager do you want to use?",
-        choices: ["yarn", "npm"],
-        when: always(packageManager === "yarn"),
-        loop: true,
-      },
-      {
-        type: "confirm",
-        name: "updateDependencies",
-        message: "Update all dependencies?",
-        default: true,
-        when: (answers) => answers.dependenciesManager === "yarn",
-      },
-      {
         type: "confirm",
         name: "dependabot",
         message: "Do you want to add dependabot?",
@@ -247,18 +232,6 @@ updates:
           );
         });
       };
-
-      if (answers.dependenciesManager === "yarn") {
-        spinner.text = "Installing dependencies with yarn";
-
-        fs.unlinkSync(path.resolve(cwd, "package-lock.json"));
-        await execAsync("yarn import");
-
-        if (answers.updateDependencies) {
-          spinner.text = "Updating dependencies";
-          await execAsync("yarn upgrade --latest");
-        }
-      }
 
       // ! This should be the last step as we git-add all the files
       // Configure git
