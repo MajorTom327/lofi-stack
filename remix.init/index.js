@@ -72,12 +72,6 @@ updates:
       },
       {
         type: "confirm",
-        name: "git",
-        message: "Do you want to initialize a git repository?",
-      },
-      {
-        type: "confirm",
-        when: (answers) => answers.git,
         name: "husky",
         message: "Do you want to add husky?",
         default: true,
@@ -156,94 +150,92 @@ updates:
 
       fs.unlinkSync(path.resolve(cwd, ".gitignore"));
 
-      if (answers.git) {
-        fs.copyFileSync(
-          path.resolve(cwd, "remix.init", "gitignore.dist"),
-          path.resolve(cwd, ".gitignore")
-        );
-      }
-
-      if (answers.git && answers.husky) {
-        const pkg = require(path.resolve(cwd, "package.json"));
-        pkg.scripts.prepare = "husky install";
-        fs.writeFileSync(
-          path.resolve(cwd, "package.json"),
-          JSON.stringify(pkg, null, 2)
-        );
-      }
-
-      // Configure dependabot
-      if (answers.dependabot) {
-        const username = answers.reviewer;
-        const dependabot = dependabotContent.replace(/##octocat##/g, username);
-
-        fs.writeFileSync(
-          path.resolve(cwd, ".github/dependabot.yml"),
-          dependabot
-        );
-      } else {
-        fs.unlinkSync(path.resolve(cwd, ".github/dependabot.yml"));
-      }
-
-      const actionContent = fs
-        .readFileSync(getPath(".github/workflows/build.yml"))
-        .toString();
-
-      // Re-enable cache for yarn as it is disabled for the stack
-      const newAction = actionContent.replace(
-        /# cache: "yarn"/g,
-        `cache: "yarn"`
+      fs.copyFileSync(
+        path.resolve(cwd, "remix.init", "gitignore.dist"),
+        path.resolve(cwd, ".gitignore")
       );
 
-      fs.writeFileSync(getPath(".github/workflows/build.yml"), newAction);
-
-      // Remove docker-compose
-      if (!answers.docker) {
-        fs.unlinkSync(getPath("docker-compose.yml"));
-      }
-
-      const readmeContent = fs.readFileSync(getPath("README.md")).toString();
-      const newReadme = readmeContent.replace(/LofiStack/g, APP_NAME);
-
-      fs.writeFileSync(getPath("README.md"), newReadme);
-
-      const rootContent = fs.readFileSync(getPath("app/root.tsx")).toString();
-      const newRootContent = rootContent.replace(
-        /title: "New Remix App"/g,
-        `title: "${APP_NAME}"`
-      );
-
-      fs.writeFileSync(getPath("app/root.tsx"), newRootContent);
-
-      const execAsync = (command) => {
-        return new Promise((resolve, reject) => {
-          exec(
-            command,
-            {
-              cwd,
-              stdio: "ignore",
-            },
-            (error) => {
-              if (error) {
-                return reject(error);
-              }
-              resolve();
-            }
+        if (answers.husky) {
+          const pkg = require(path.resolve(cwd, "package.json"));
+          pkg.scripts.prepare = "husky install";
+          fs.writeFileSync(
+            path.resolve(cwd, "package.json"),
+            JSON.stringify(pkg, null, 2)
           );
-        });
-      };
+        }
 
-      // ! This should be the last step as we git-add all the files
-      // Configure git
-      if (answers.git) {
+        // Configure dependabot
+        if (answers.dependabot) {
+          const username = answers.reviewer;
+          const dependabot = dependabotContent.replace(
+            /##octocat##/g,
+            username
+          );
+
+          fs.writeFileSync(
+            path.resolve(cwd, ".github/dependabot.yml"),
+            dependabot
+          );
+        } else {
+          fs.unlinkSync(path.resolve(cwd, ".github/dependabot.yml"));
+        }
+
+        const actionContent = fs
+          .readFileSync(getPath(".github/workflows/build.yml"))
+          .toString();
+
+        // Re-enable cache for yarn as it is disabled for the stack
+        const newAction = actionContent.replace(
+          /# cache: "yarn"/g,
+          `cache: "yarn"`
+        );
+
+        fs.writeFileSync(getPath(".github/workflows/build.yml"), newAction);
+
+        // Remove docker-compose
+        if (!answers.docker) {
+          fs.unlinkSync(getPath("docker-compose.yml"));
+        }
+
+        const readmeContent = fs.readFileSync(getPath("README.md")).toString();
+        const newReadme = readmeContent.replace(/LofiStack/g, APP_NAME);
+
+        fs.writeFileSync(getPath("README.md"), newReadme);
+
+        const rootContent = fs.readFileSync(getPath("app/root.tsx")).toString();
+        const newRootContent = rootContent.replace(
+          /title: "New Remix App"/g,
+          `title: "${APP_NAME}"`
+        );
+
+        fs.writeFileSync(getPath("app/root.tsx"), newRootContent);
+
+        const execAsync = (command) => {
+          return new Promise((resolve, reject) => {
+            exec(
+              command,
+              {
+                cwd,
+                stdio: "ignore",
+              },
+              (error) => {
+                if (error) {
+                  return reject(error);
+                }
+                resolve();
+              }
+            );
+          });
+        };
+
+        // ! This should be the last step as we git-add all the files
+        // Configure git
         try {
-          execSync("git init", { cwd });
           execSync("git add .", { cwd });
           execSync("git rm -r --cached remix.init", { cwd });
         } catch (error) {
           console.log("Cannot initialize git repository");
         }
-      }
 
       spinner.succeed("Your project is ready!");
 
