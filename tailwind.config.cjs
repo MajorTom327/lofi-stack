@@ -29,17 +29,8 @@ const toLight = (color) => chroma(color).brighten(colorModifier.light).hex();
 const toDark = (color) => chroma(color).darken(colorModifier.light).hex();
 const getContentColor = (colorHex) => {
   const color = chroma(colorHex);
-  const originalHue = chroma(color).get("hsl.h");
-  const oppositeHue = (originalHue + 180) % 360;
-  const oppositeColor = chroma.hsl(
-    oppositeHue,
-    color.get("hsl.s"),
-    color.get("hsl.l")
-  );
-
-  return oppositeColor.hex();
+  return chroma.contrast(color, colors.light) > 4 ? colors.light : colors.dark;
 };
-// chroma.contrast(color, colors.light) > 4 ? colors.light : colors.dark;
 
 module.exports = {
   darkMode: ["class"],
