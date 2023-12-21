@@ -41,7 +41,7 @@
     "clsx": "^2.0.0",
     "crypto-js": "^4.1.1",
     "isbot": "^3.6.8",
-    "lucide-react": "^0.294.0",
+    "lucide-react": "^0.299.0",
     "luxon": "^3.4.3",
     "pino": "^8.15.1",
     "pino-pretty": "^10.2.0",
