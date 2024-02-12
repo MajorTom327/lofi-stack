@@ -1,4 +1,5 @@
 const fs = require("node:fs/promises");
+const path = require('path');
 
 const getPackageManagerCommand = (packageManager) =>
   match(packageManager)
