@@ -151,9 +151,7 @@ const main = async ({ packageManager, rootDirectory }) => {
   await initializeFiles({ rootDirectory, answers, packageManagerCommand });
   await initDatabase({ rootDirectory, answers,packageManagerCommand });
 
-  packageManagerCommand.run('env:gen')
-
-  console.log("🎉 All done! 🎉");
+  await packageManagerCommand.run('env:gen');
 }
 
 module.exports = main
