@@ -114,7 +114,7 @@ const initDatabase = async ({ answers, rootDirectory, packageManagerCommand }) =
   );
 
   await packageManagerCommand.install('prisma', true);
-  await packageManagerCommand.exec('prisma', 'init');
+  await packageManagerCommand.run('prisma', 'init');
 
   const PackageJson = require("@npmcli/package-json");
   const packageJson = await PackageJson.load(rootDirectory)
@@ -150,6 +150,8 @@ const main = async ({ packageManager, rootDirectory }) => {
 
   await initializeFiles({ rootDirectory, answers, packageManagerCommand });
   await initDatabase({ rootDirectory, answers,packageManagerCommand });
+
+  packageManagerCommand.run('env:gen')
 
   console.log("🎉 All done! 🎉");
 }
