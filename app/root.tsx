@@ -1,5 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,11 +7,23 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  json,
 } from "@remix-run/react";
+import stylesheet from "~/tailwind.css";
+import Env from "./services/env.server";
 
 export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
+
+export const loader = async ({ }: LoaderFunctionArgs) => {
+  const env = Env.getPublicEnv();
+  return json({
+    env,
+  });
+};
+
 
 export default function App() {
   return (
