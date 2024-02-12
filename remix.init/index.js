@@ -119,7 +119,7 @@ const initDatabase = async ({ answers, rootDirectory, packageManagerCommand }) =
   const PackageJson = require("@npmcli/package-json");
   const packageJson = await PackageJson.load(rootDirectory)
 
-  packageJson.update({
+  await packageJson.update({
     scripts: {
       "db:gen": "prisma generate",
       "db:migrate": "prisma migrate dev",
@@ -127,6 +127,13 @@ const initDatabase = async ({ answers, rootDirectory, packageManagerCommand }) =
       "db:studio": "prisma studio",
     },
   });
+
+  const lines = [
+    `# Database Env Variables`,
+    `DATABASE_URL="postgresql://{{docker:postgres.POSTGRES_USER}}:{{docker:postgres.POSTGRES_PASSWORD}}@localhost:5432/{{docker:postgres.POSTGRES_DB}}"`,
+  ]
+
+  await fs.appendFile(path.resolve(rootDirectory, ".env.dist"), lines.join('\n'))
 }
 
 const main = async ({ packageManager, rootDirectory }) => {
@@ -152,6 +159,7 @@ const main = async ({ packageManager, rootDirectory }) => {
   await initDatabase({ rootDirectory, answers,packageManagerCommand });
 
   await packageManagerCommand.run('env:gen');
+
 }
 
 module.exports = main
