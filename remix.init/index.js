@@ -113,8 +113,8 @@ const initDatabase = async ({ answers, rootDirectory, packageManagerCommand }) =
     path.join(rootDirectory, "docker-compose.yml")
   );
 
-  await packageManagerCommand.install('prisma', true);
-  await packageManagerCommand.run('prisma', 'init');
+  await execSync(packageManagerCommand.install('prisma', true));
+  await execSync(packageManagerCommand.run('prisma', 'init'));
 
   const PackageJson = require("@npmcli/package-json");
   const packageJson = await PackageJson.load(rootDirectory)
@@ -158,7 +158,7 @@ const main = async ({ packageManager, rootDirectory }) => {
   await initializeFiles({ rootDirectory, answers, packageManagerCommand });
   await initDatabase({ rootDirectory, answers,packageManagerCommand });
 
-  await packageManagerCommand.run('env:gen');
+  await execSync(packageManagerCommand.run('env:gen'));
 
 }
 
