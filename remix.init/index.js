@@ -1,6 +1,7 @@
 const fs = require("node:fs/promises");
 const path = require('path');
-const { match } = require('ts-pattern')
+const { match } = require('ts-pattern');
+const { execSync } = require("node:child_process");
 
 const getPackageManagerCommand = (packageManager) =>
   match(packageManager)

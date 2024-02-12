@@ -12,7 +12,8 @@
     "create:page": "node ./scripts/createPage.mjs",
     "test": "vitest",
     "typecheck": "tsc",
-    "env:gen": "env-refiner -i ./.env.dist -o ./.env"
+    "env:gen": "env-refiner -i ./.env.dist -o ./.env",
+    "shad:add": "npx shadcn-ui@latest add"
   },
   "dependencies": {
     "@remix-run/css-bundle": "^2.6.0",
