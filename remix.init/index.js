@@ -1,5 +1,6 @@
 const fs = require("node:fs/promises");
 const path = require('path');
+const { match } = require('ts-pattern')
 
 const getPackageManagerCommand = (packageManager) =>
   match(packageManager)
@@ -78,38 +79,25 @@ const askQuestions = async () => {
 }
 
 const initializeFiles = async ({ answers, rootDirectory }) => {
-    await Promise.all([
-    fs.copyFile(
-      path.join(rootDirectory, "remix.init", "gitignore"),
-      path.join(rootDirectory, ".gitignore"),
-    ),
-    fs.rm(path.join(rootDirectory, ".github", "dependabot.yml")),
-    fs.rm(path.join(rootDirectory, "LICENSE.md")),
+
+  const ejs = require("ejs");
+  await Promise.all([
+    fs.copyFile(path.join(rootDirectory, "remix.init", "gitignore"), path.join(rootDirectory, ".gitignore")),
     ...["build", "format-repo", "lint-repo"].map((workflow) => {
       return new Promise((resolve) => {
-        ejs.renderFile(
-          path.join(
-            rootDirectory,
-            "remix.init",
-            "workflows",
-            `${workflow}.yml.ejs`,
-          ),
-          answers,
+        const from = path.join(rootDirectory, `remix.init/workflows/${workflow}.yml.ejs`)
+        const to = path.join(rootDirectory, `.github/workflows/${workflow}.yml`);
+
+        ejs.renderFile(from, answers,
           (err, str) => {
             if (err) {
               console.error(err);
               return;
             }
 
-            fs.writeFile(
-              path.join(
-                rootDirectory,
-                ".github",
-                "workflows",
-                `${workflow}.yml`,
-              ),
-              str,
-            ).then(resolve);
+            fs.writeFile(to, str).then(resolve).catch(() => {
+              console.error(`Error writing to ${to}`);
+            });
           },
         );
       });
@@ -122,13 +110,14 @@ const initDatabase = async ({ answers, rootDirectory, packageManagerCommand }) =
 
   await fs.copyFile(
     path.join(rootDirectory, "remix.init", "docker-compose.yml"),
-    path.join(rootDirectory, "docker-compose.yml"),
+    path.join(rootDirectory, "docker-compose.yml")
   );
 
   await packageManagerCommand.install('prisma', true);
   await packageManagerCommand.exec('prisma', 'init');
 
-  const packageJson = PackageJson.load()
+  const PackageJson = require("@npmcli/package-json");
+  const packageJson = await PackageJson.load(rootDirectory)
 
   packageJson.update({
     scripts: {
@@ -152,7 +141,7 @@ const main = async ({ packageManager, rootDirectory }) => {
   const answers = await askQuestions({ packageManager, rootDirectory})
 
 
-  const packageJson = PackageJson.load()
+  const packageJson = await PackageJson.load(rootDirectory)
 
   packageJson.update({
     name: APP_NAME,
