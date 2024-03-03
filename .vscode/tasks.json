@@ -4,23 +4,27 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "create page",
+      "label": "Generate page",
       "type": "shell",
-      "command": "yarn create:page '${input:pageName}'",
+      "command": "bun",
       "problemMatcher": [],
+      "detail": "Generate new page",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "presentation": {
-        "echo": false,
-        "reveal": "never",
+        "echo": true,
+        "reveal": "silent",
         "focus": false,
         "panel": "shared",
-        "showReuseMessage": false,
-        "clear": true
+        "showReuseMessage": true,
+        "clear": false
       },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
-    }
+      "args": [
+        "./scripts/new_page",
+        "'${input:pageName}'"
+      ]
+    },
   ],
   "inputs": [
     {
